@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Contact — APEX SHIELD</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:ital,wght@0,300;0,400;0,500;0,600;1,300&family=Barlow+Condensed:wght@400;600;700&display=swap" rel="stylesheet"/>
+<style>
+:root{--black:#080808;--white:#f5f2ee;--gold:#c9a84c;--gold-light:#e8c96a;--gold-dim:#8a6e2f;--gray:#1a1a1a;--gray-mid:#2e2e2e;--gray-light:#888;--font-display:'Bebas Neue',sans-serif;--font-cond:'Barlow Condensed',sans-serif;--font-body:'Barlow',sans-serif;}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:var(--black);color:var(--white);font-family:var(--font-body);font-weight:300;overflow-x:hidden;}
+body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");pointer-events:none;z-index:1000;opacity:.4;}
+
+nav{position:fixed;top:0;left:0;right:0;z-index:900;display:flex;align-items:center;justify-content:space-between;padding:0 4vw;height:72px;border-bottom:1px solid rgba(201,168,76,.12);backdrop-filter:blur(18px);background:rgba(8,8,8,.9);}
+.nav-logo{font-family:var(--font-display);font-size:1.7rem;letter-spacing:.15em;color:var(--gold);text-decoration:none;}
+.nav-logo span{color:var(--white);}
+.nav-links{display:flex;gap:2.5rem;list-style:none;}
+.nav-links a{font-family:var(--font-cond);font-size:.85rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gray-light);text-decoration:none;transition:color .2s;}
+.nav-links a:hover,.nav-links a.active{color:var(--white);}
+.nav-cta{font-family:var(--font-cond);font-size:.8rem;letter-spacing:.2em;text-transform:uppercase;color:var(--black);background:var(--gold);padding:.55rem 1.4rem;text-decoration:none;border:1px solid var(--gold);transition:.2s;}
+.nav-cta:hover{background:transparent;color:var(--gold);}
+.hamburger{display:none;flex-direction:column;gap:5px;background:none;border:none;padding:4px;cursor:pointer;}
+.hamburger span{width:24px;height:1.5px;background:var(--white);display:block;}
+.mobile-menu{display:none;position:fixed;inset:0;z-index:850;background:rgba(8,8,8,.97);flex-direction:column;align-items:center;justify-content:center;gap:2rem;}
+.mobile-menu.open{display:flex;}
+.mobile-menu a{font-family:var(--font-display);font-size:3rem;color:var(--white);text-decoration:none;}
+.mobile-menu a:hover{color:var(--gold);}
+.mobile-close{position:absolute;top:2rem;right:2rem;background:none;border:none;color:var(--white);font-size:1.8rem;cursor:pointer;}
+
+/* PAGE HERO */
+.page-hero{padding:14rem 6vw 6rem;position:relative;overflow:hidden;border-bottom:1px solid rgba(201,168,76,.1);}
+.page-hero::before{content:'CONTACT';font-family:var(--font-display);font-size:18vw;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);-webkit-text-stroke:1px rgba(201,168,76,.04);color:transparent;pointer-events:none;white-space:nowrap;}
+.page-tag{font-family:var(--font-cond);font-size:.75rem;letter-spacing:.35em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem;display:flex;align-items:center;gap:.7rem;}
+.page-tag::before{content:'';width:30px;height:1px;background:var(--gold);}
+.page-title{font-family:var(--font-display);font-size:clamp(3rem,8vw,8rem);line-height:.95;letter-spacing:.04em;}
+.page-sub{font-size:1rem;color:var(--gray-light);max-width:500px;line-height:1.7;margin-top:1.5rem;}
+
+/* CONTACT GRID */
+.contact-section{
+  padding:7rem 6vw;
+  display:grid;grid-template-columns:1fr 1fr;gap:8rem;
+  align-items:start;
+}
+.contact-info{}
+.section-tag{font-family:var(--font-cond);font-size:.7rem;letter-spacing:.35em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem;display:flex;align-items:center;gap:.7rem;}
+.section-tag::before{content:'';width:30px;height:1px;background:var(--gold);}
+.section-title{font-family:var(--font-display);font-size:clamp(2.5rem,5vw,5rem);line-height:1;letter-spacing:.04em;color:var(--white);margin-bottom:1.5rem;}
+.section-body{font-size:.95rem;color:var(--gray-light);line-height:1.75;margin-bottom:2.5rem;}
+
+.contact-methods{display:flex;flex-direction:column;gap:1.2rem;margin-bottom:3rem;}
+.contact-method{
+  display:flex;align-items:center;gap:1.5rem;
+  padding:1.5rem;
+  border:1px solid rgba(201,168,76,.1);
+  transition:border-color .2s;
+}
+.contact-method:hover{border-color:rgba(201,168,76,.3);}
+.method-icon{
+  width:48px;height:48px;
+  border:1px solid var(--gold-dim);
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.3rem;flex-shrink:0;color:var(--gold);
+}
+.method-label{font-family:var(--font-cond);font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gray-light);margin-bottom:.3rem;}
+.method-value{font-size:.95rem;color:var(--white);font-weight:400;}
+.method-value a{color:var(--white);text-decoration:none;transition:.2s;}
+.method-value a:hover{color:var(--gold);}
+
+.hours-block{
+  padding:2rem;
+  border:1px solid rgba(201,168,76,.1);
+  background:var(--gray);
+}
+.hours-title{font-family:var(--font-cond);font-size:.72rem;letter-spacing:.25em;text-transform:uppercase;color:var(--gold);margin-bottom:1.2rem;}
+.hours-row{display:flex;justify-content:space-between;padding:.5rem 0;border-bottom:1px solid rgba(255,255,255,.04);font-size:.88rem;color:var(--gray-light);}
+.hours-row:last-child{border-bottom:none;}
+.hours-row span:first-child{color:var(--white);}
+
+/* FORM */
+.contact-form-wrap{}
+.form-title{font-family:var(--font-display);font-size:2.5rem;letter-spacing:.06em;color:var(--white);margin-bottom:.5rem;}
+.form-sub{font-size:.9rem;color:var(--gray-light);margin-bottom:2.5rem;line-height:1.6;}
+
+.contact-form{display:flex;flex-direction:column;gap:1rem;}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem;}
+.form-group{display:flex;flex-direction:column;gap:.5rem;}
+.form-group label{font-family:var(--font-cond);font-size:.7rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gray-light);}
+.form-group input,
+.form-group select,
+.form-group textarea{
+  background:var(--gray);
+  border:1px solid rgba(201,168,76,.12);
+  color:var(--white);
+  padding:.85rem 1rem;
+  font-family:var(--font-body);font-size:.9rem;font-weight:300;
+  outline:none;
+  transition:border-color .2s;
+  width:100%;
+  resize:none;
+}
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus{border-color:var(--gold);}
+.form-group select{appearance:none;-webkit-appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23c9a84c' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 1rem center;}
+.form-group select option{background:var(--gray);}
+.form-submit{
+  font-family:var(--font-cond);font-size:.9rem;letter-spacing:.2em;text-transform:uppercase;
+  padding:1.1rem 2rem;background:var(--gold);color:var(--black);
+  border:1px solid var(--gold);cursor:pointer;transition:.2s;font-weight:600;
+  margin-top:.5rem;
+}
+.form-submit:hover{background:transparent;color:var(--gold);}
+.form-note{font-size:.78rem;color:var(--gray-light);line-height:1.5;}
+.form-success{
+  display:none;
+  padding:2rem;background:rgba(201,168,76,.08);border:1px solid var(--gold);
+  font-family:var(--font-cond);font-size:.9rem;letter-spacing:.1em;
+  color:var(--gold);text-align:center;
+}
+
+/* FAQ SECTION */
+.faq-section{
+  padding:7rem 6vw;
+  background:var(--gray);
+  border-top:1px solid rgba(201,168,76,.1);
+}
+.faq-grid{
+  display:grid;grid-template-columns:1fr 1fr;gap:3rem;
+  margin-top:4rem;
+}
+.faq-group{}
+.faq-group-title{
+  font-family:var(--font-cond);font-size:.75rem;letter-spacing:.25em;text-transform:uppercase;
+  color:var(--gold);margin-bottom:1.5rem;padding-bottom:.8rem;
+  border-bottom:1px solid rgba(201,168,76,.15);
+}
+.faq-item{
+  border-bottom:1px solid rgba(255,255,255,.05);
+}
+.faq-q{
+  width:100%;padding:1.1rem 0;background:none;border:none;
+  display:flex;justify-content:space-between;align-items:center;
+  font-family:var(--font-body);font-size:.9rem;color:var(--white);
+  cursor:pointer;text-align:left;font-weight:400;transition:.2s;gap:1rem;
+}
+.faq-q:hover{color:var(--gold);}
+.faq-icon{font-size:1rem;color:var(--gold);flex-shrink:0;transition:transform .3s;}
+.faq-item.open .faq-icon{transform:rotate(45deg);}
+.faq-a{display:none;padding-bottom:1.1rem;font-size:.88rem;color:var(--gray-light);line-height:1.7;}
+.faq-item.open .faq-a{display:block;}
+
+/* SHIPPING SECTION */
+.shipping-section{
+  padding:7rem 6vw;
+  border-top:1px solid rgba(201,168,76,.1);
+}
+.shipping-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;
+  margin-top:4rem;
+}
+.ship-card{
+  padding:2.5rem 2rem;
+  border:1px solid rgba(201,168,76,.1);
+  transition:border-color .2s;
+}
+.ship-card:hover{border-color:rgba(201,168,76,.3);}
+.ship-icon{font-size:2.2rem;color:var(--gold);margin-bottom:1.2rem;}
+.ship-title{font-family:var(--font-cond);font-size:1rem;letter-spacing:.15em;text-transform:uppercase;color:var(--white);margin-bottom:.7rem;}
+.ship-time{font-family:var(--font-display);font-size:2rem;color:var(--gold);margin-bottom:.5rem;line-height:1;}
+.ship-desc{font-size:.85rem;color:var(--gray-light);line-height:1.6;}
+.ship-price{
+  margin-top:1rem;font-family:var(--font-cond);font-size:.8rem;letter-spacing:.1em;
+  color:var(--gold-dim);
+}
+
+/* RETURNS SECTION */
+.returns-section{
+  padding:5rem 6vw 7rem;
+  background:var(--gray);
+  border-top:1px solid rgba(201,168,76,.1);
+}
+.returns-content{
+  display:grid;grid-template-columns:1fr 1fr;gap:6rem;align-items:start;
+}
+.returns-text{}
+.returns-steps{display:flex;flex-direction:column;gap:1.5rem;}
+.return-step{
+  display:flex;gap:1.5rem;align-items:flex-start;
+  padding-bottom:1.5rem;
+  border-bottom:1px solid rgba(201,168,76,.06);
+}
+.return-step:last-child{border-bottom:none;}
+.step-circle{
+  width:40px;height:40px;border-radius:50%;border:1px solid var(--gold-dim);
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;
+  font-family:var(--font-display);font-size:1.1rem;color:var(--gold);
+}
+.step-info .step-title{font-family:var(--font-cond);font-size:.88rem;letter-spacing:.12em;text-transform:uppercase;color:var(--white);margin-bottom:.4rem;}
+.step-info p{font-size:.85rem;color:var(--gray-light);line-height:1.6;}
+
+footer{background:var(--gray);border-top:1px solid rgba(201,168,76,.12);padding:5rem 6vw 3rem;}
+.footer-top{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:4rem;margin-bottom:4rem;}
+.footer-logo{font-family:var(--font-display);font-size:2rem;letter-spacing:.15em;color:var(--gold);display:block;margin-bottom:1rem;text-decoration:none;}
+.footer-logo span{color:var(--white);}
+.footer-tagline{font-size:.88rem;color:var(--gray-light);line-height:1.7;max-width:260px;}
+.footer-col-title{font-family:var(--font-cond);font-size:.75rem;letter-spacing:.25em;text-transform:uppercase;color:var(--gold);margin-bottom:1.5rem;}
+.footer-links{list-style:none;}
+.footer-links li{margin-bottom:.7rem;}
+.footer-links a{font-size:.88rem;color:var(--gray-light);text-decoration:none;transition:color .2s;}
+.footer-links a:hover{color:var(--white);}
+.footer-bottom{border-top:1px solid rgba(201,168,76,.08);padding-top:2rem;display:flex;justify-content:space-between;align-items:center;}
+.footer-copy{font-size:.78rem;color:var(--gray-light);}
+.footer-social{display:flex;gap:1.2rem;}
+.social-link{width:38px;height:38px;border:1px solid rgba(201,168,76,.2);display:flex;align-items:center;justify-content:center;color:var(--gray-light);text-decoration:none;font-size:.85rem;transition:.2s;}
+.social-link:hover{border-color:var(--gold);color:var(--gold);}
+
+.reveal{opacity:0;transform:translateY(30px);transition:opacity .8s ease,transform .8s ease;}
+.reveal.visible{opacity:1;transform:none;}
+
+@media(max-width:1024px){
+  .contact-section,.returns-content{grid-template-columns:1fr;gap:4rem;}
+  .faq-grid,.shipping-grid{grid-template-columns:1fr;}
+  .footer-top{grid-template-columns:1fr 1fr;gap:3rem;}
+}
+@media(max-width:768px){
+  .nav-links,.nav-cta{display:none;}.hamburger{display:flex;}
+  .form-row{grid-template-columns:1fr;}
+  .footer-top{grid-template-columns:1fr;}
+  .footer-bottom{flex-direction:column;gap:1.5rem;text-align:center;}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">APEX<span>SHIELD</span></a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="products.html">Products</a></li>
+    <li><a href="contact.html" class="active">Contact</a></li>
+  </ul>
+  <a href="products.html" class="nav-cta">Shop Now</a>
+  <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <button class="mobile-close" id="mobileClose">✕</button>
+  <a href="index.html" onclick="closeMobile()">Home</a>
+  <a href="products.html" onclick="closeMobile()">Products</a>
+  <a href="contact.html" onclick="closeMobile()">Contact</a>
+</div>
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <div class="page-tag">We're Here to Help</div>
+  <h1 class="page-title">GET IN<br/>TOUCH</h1>
+  <p class="page-sub">Questions about our products, installation, shipping, or anything else — our team is ready to help.</p>
+</div>
+
+<!-- CONTACT SECTION -->
+<section class="contact-section">
+  <div class="contact-info reveal">
+    <div class="section-tag">Reach Us Directly</div>
+    <h2 class="section-title">TALK TO<br/>OUR TEAM</h2>
+    <p class="section-body">Whether you're a first-time buyer or a professional installer with a technical question, our team responds fast and knows the product inside out.</p>
+
+    <div class="contact-methods">
+      <div class="contact-method">
+        <div class="method-icon">✉</div>
+        <div>
+          <div class="method-label">Email</div>
+          <div class="method-value"><a href="mailto:support@apexshield.com">support@apexshield.com</a></div>
+        </div>
+      </div>
+      <div class="contact-method">
+        <div class="method-icon">📞</div>
+        <div>
+          <div class="method-label">Phone</div>
+          <div class="method-value"><a href="tel:+18005550199">+1 (800) 555-0199</a></div>
+        </div>
+      </div>
+      <div class="contact-method">
+        <div class="method-icon">💬</div>
+        <div>
+          <div class="method-label">Live Chat</div>
+          <div class="method-value">Available Mon–Fri, 9am–6pm EST</div>
+        </div>
+      </div>
+      <div class="contact-method">
+        <div class="method-icon">📸</div>
+        <div>
+          <div class="method-label">Instagram / DMs</div>
+          <div class="method-value"><a href="#">@apexshieldppf</a></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="hours-block">
+      <div class="hours-title">Business Hours</div>
+      <div class="hours-row"><span>Monday – Friday</span><span>9:00 AM – 6:00 PM EST</span></div>
+      <div class="hours-row"><span>Saturday</span><span>10:00 AM – 3:00 PM EST</span></div>
+      <div class="hours-row"><span>Sunday</span><span>Closed</span></div>
+      <div class="hours-row"><span>Average Response Time</span><span style="color:var(--gold);">Under 4 Hours</span></div>
+    </div>
+  </div>
+
+  <div class="contact-form-wrap reveal">
+    <div class="form-title">SEND A MESSAGE</div>
+    <p class="form-sub">Fill in the form below and we'll get back to you within a few hours during business days.</p>
+
+    <div class="form-success" id="formSuccess">
+      ✓ Message sent successfully! We'll be in touch shortly.
+    </div>
+
+    <form class="contact-form" id="contactForm" novalidate>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="fname">First Name *</label>
+          <input type="text" id="fname" name="fname" placeholder="John" required/>
+        </div>
+        <div class="form-group">
+          <label for="lname">Last Name *</label>
+          <input type="text" id="lname" name="lname" placeholder="Doe" required/>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="email">Email Address *</label>
+        <input type="email" id="email" name="email" placeholder="john@example.com" required/>
+      </div>
+      <div class="form-group">
+        <label for="subject">Subject</label>
+        <select id="subject" name="subject">
+          <option value="">Select a topic...</option>
+          <option>Product Inquiry</option>
+          <option>Order Status</option>
+          <option>Installation Help</option>
+          <option>Warranty Claim</option>
+          <option>Return / Refund</option>
+          <option>Wholesale / Trade</option>
+          <option>Other</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="product">Related Product</label>
+        <select id="product" name="product">
+          <option value="">Select a product (optional)...</option>
+          <option>APX PPF Film</option>
+          <option>Pro Wrap Tools</option>
+          <option>Shield Pro Kit</option>
+          <option>General / Not Product-Specific</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="message">Message *</label>
+        <textarea id="message" name="message" rows="5" placeholder="Tell us how we can help..." required></textarea>
+      </div>
+      <button type="submit" class="form-submit">Send Message →</button>
+      <p class="form-note">By submitting this form, you agree to our privacy policy. We never share your information with third parties.</p>
+    </form>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq-section" id="faq">
+  <div class="section-tag reveal">Common Questions</div>
+  <h2 class="section-title reveal">FREQUENTLY ASKED<br/>QUESTIONS</h2>
+
+  <div class="faq-grid">
+    <div class="faq-group reveal">
+      <div class="faq-group-title">Product & Installation</div>
+
+      <div class="faq-item">
+        <button class="faq-q"><span>What is PPF and how does it work?</span><span class="faq-icon">+</span></button>
+        <div class="faq-a">Paint Protection Film (PPF) is a thermoplastic urethane film applied over your vehicle's paint. It creates an invisible barrier against rock chips, scratches, UV rays, and environmental contaminants. Our APX PPF also self-heals light scratches when exposed to heat.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q"><span>Can a beginner install PPF at home?</span><span class="faq-icon">+</span></button>
+        <div class="faq-a">Yes — with the right tools and preparation. We recommend starting with smaller panels like mirrors or door cups. The Shield Pro Kit includes a 60-page installation manual and video library access to guide you through every step.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q"><span>Does APX PPF come in matte finish?</span><span class="faq-icon">+</span></button>
+        <div class="faq-a">Yes. APX PPF is available in both Gloss (transparent, enhances paint depth) and Matte (transforms any gloss paint to a satin/matte finish). Select your preferred finish at checkout.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q"><span>How long does the film last?</span><span class="faq-icon">+</span></button>
+        <div class="faq-a">APX PPF carries a 10-year manufacturer warranty against delamination, yellowing, cracking, and adhesive failure. With proper care and maintenance, many installations last well beyond the warranty period.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q"><span>What vehicles is the film compatible with?</span><span class="faq-icon">+</span></button>
+        <div class="faq-a">APX PPF is compatible with all standard automotive paint finishes including gloss, matte, satin, and factory-wrapped surfaces. It is safe for use on paint, plastics, chrome trim, and headlights.</div>
+      </div>
+    </div>
+
+    <div class="faq-group reveal">
+      <div class="faq-group-title">Orders & Shipping</div>
+
+      <div class="faq-item">
+        <button class="faq-q"><span>How long does shipping take?</span><span class="faq-icon">+</span></button>
+        <div class="faq-a">Standard shipping takes 3–5 business days within the US. Expedited (2-day) and overnight options are available at checkout. All orders ship within 1–2 business days from our warehouse. International orders typically arrive in 7–14 business days.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q"><span>Do you offer free shipping?</span><span class="faq-icon">+</span></button>
+        <div class="faq-a">Yes — free standard shipping on all US orders over $200. The Shield Pro Kit qualifies for free priority shipping regardless of total order value. International shipping rates are calculated at checkout.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q"><span>Do you ship internationally?</span><span class="faq-icon">+</span></button>
+        <div class="faq-a">Yes. We ship to over 40 countries worldwide. International rates and estimated delivery times are shown at checkout. Note that import duties and taxes may apply in your country.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q"><span>What payment methods do you accept?</span><span class="faq-icon">+</span></button>
+        <div class="faq-a">All major credit and debit cards (Visa, Mastercard, Amex, Discover), Apple Pay, Google Pay, and other methods supported by Stripe. All payments are processed securely through Stripe's encrypted checkout.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q"><span>Can I change or cancel my order?</span><span class="faq-icon">+</span></button>
+        <div class="faq-a">Orders can be modified or cancelled within 2 hours of placement, before warehouse processing begins. Contact us immediately via email or phone if you need to make changes.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SHIPPING INFO -->
+<section class="shipping-section" id="shipping">
+  <div class="section-tag reveal">Shipping Information</div>
+  <h2 class="section-title reveal">FAST, RELIABLE<br/>DELIVERY</h2>
+  <div class="shipping-grid">
+    <div class="ship-card reveal">
+      <div class="ship-icon">📦</div>
+      <div class="ship-title">Standard Shipping</div>
+      <div class="ship-time">3–5 Days</div>
+      <p class="ship-desc">Reliable ground shipping to all 50 US states. Tracking included on every order.</p>
+      <div class="ship-price">Free on orders $200+ · Otherwise $9.99</div>
+    </div>
+    <div class="ship-card reveal">
+      <div class="ship-icon">⚡</div>
+      <div class="ship-title">Expedited Shipping</div>
+      <div class="ship-time">1–2 Days</div>
+      <p class="ship-desc">Need it fast? Our expedited option gets your order to your door in 1–2 business days.</p>
+      <div class="ship-price">From $19.99 · Free on Shield Pro Kit</div>
+    </div>
+    <div class="ship-card reveal">
+      <div class="ship-icon">✈</div>
+      <div class="ship-title">International</div>
+      <div class="ship-time">7–14 Days</div>
+      <p class="ship-desc">We ship to 40+ countries worldwide. Rates calculated at checkout based on destination.</p>
+      <div class="ship-price">From $24.99 · Duties may apply</div>
+    </div>
+  </div>
+</section>
+
+<!-- RETURNS SECTION -->
+<section class="returns-section">
+  <div class="returns-content">
+    <div class="returns-text reveal">
+      <div class="section-tag">Easy Returns</div>
+      <h2 class="section-title" style="font-size:clamp(2rem,4vw,4rem);">30-DAY<br/>RETURN POLICY</h2>
+      <p class="section-body">Not satisfied? We make returns simple. If you're not happy with your order for any reason, return it within 30 days of delivery for a full refund or exchange.</p>
+      <p class="section-body" style="margin-top:1rem;">Returned items must be unused and in original packaging. Once received and inspected, refunds are processed within 5–7 business days.</p>
+    </div>
+    <div class="returns-steps reveal">
+      <div class="return-step">
+        <div class="step-circle">1</div>
+        <div class="step-info">
+          <div class="step-title">Contact Us</div>
+          <p>Email support@apexshield.com with your order number and reason for return. We'll reply with a prepaid label within 24 hours.</p>
+        </div>
+      </div>
+      <div class="return-step">
+        <div class="step-circle">2</div>
+        <div class="step-info">
+          <div class="step-title">Pack Your Item</div>
+          <p>Repack the product in its original packaging. Attach the prepaid return label and drop it at any authorized carrier location.</p>
+        </div>
+      </div>
+      <div class="return-step">
+        <div class="step-circle">3</div>
+        <div class="step-info">
+          <div class="step-title">Get Refunded</div>
+          <p>Once we receive and inspect the return, your refund is processed to the original payment method within 5–7 business days.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-top">
+    <div>
+      <a href="index.html" class="footer-logo">APEX<span>SHIELD</span></a>
+      <p class="footer-tagline">Professional paint protection films and tools for those who demand perfection.</p>
+    </div>
+    <div>
+      <div class="footer-col-title">Products</div>
+      <ul class="footer-links">
+        <li><a href="product.html?id=ppf">APX PPF Film</a></li>
+        <li><a href="product.html?id=tools">Pro Wrap Tools</a></li>
+        <li><a href="product.html?id=kit">Shield Pro Kit</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">Company</div>
+      <ul class="footer-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="products.html">All Products</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">Support</div>
+      <ul class="footer-links">
+        <li><a href="#faq">FAQ</a></li>
+        <li><a href="#shipping">Shipping Info</a></li>
+        <li><a href="contact.html">Warranty Claims</a></li>
+        <li><a href="contact.html">Returns</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p class="footer-copy">© 2025 APEX SHIELD. All rights reserved.</p>
+    <div class="footer-social">
+      <a href="#" class="social-link">IG</a>
+      <a href="#" class="social-link">YT</a>
+      <a href="#" class="social-link">FB</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+const hamburger=document.getElementById('hamburger');
+const mobileMenu=document.getElementById('mobileMenu');
+const mobileClose=document.getElementById('mobileClose');
+function closeMobile(){mobileMenu.classList.remove('open');}
+hamburger.addEventListener('click',()=>mobileMenu.classList.add('open'));
+mobileClose.addEventListener('click',closeMobile);
+
+// FAQ accordion
+document.querySelectorAll('.faq-q').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    const item=btn.parentElement;
+    item.classList.toggle('open');
+  });
+});
+
+// Contact form
+document.getElementById('contactForm').addEventListener('submit',function(e){
+  e.preventDefault();
+  const name=document.getElementById('fname').value.trim();
+  const email=document.getElementById('email').value.trim();
+  const msg=document.getElementById('message').value.trim();
+  if(!name||!email||!msg){
+    alert('Please fill in all required fields.');return;
+  }
+  this.style.display='none';
+  document.getElementById('formSuccess').style.display='block';
+});
+
+// Scroll reveal
+const reveals=document.querySelectorAll('.reveal');
+const observer=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');});
+},{threshold:.1,rootMargin:'0px 0px -60px 0px'});
+reveals.forEach(r=>observer.observe(r));
+
+// Check hash on load for FAQ / shipping
+if(window.location.hash==='#faq'){
+  setTimeout(()=>document.getElementById('faq').scrollIntoView({behavior:'smooth'}),300);
+}
+if(window.location.hash==='#shipping'){
+  setTimeout(()=>document.getElementById('shipping').scrollIntoView({behavior:'smooth'}),300);
+}
+</script>
+</body>
+</html>
