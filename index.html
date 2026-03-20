@@ -3,963 +3,388 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>APEX SHIELD — Premium Paint Protection</title>
+<title>APEX SHIELD — Paint Protection</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:ital,wght@0,300;0,400;0,500;0,600;1,300&family=Barlow+Condensed:wght@400;600;700&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@200;300;400;500&family=Syne:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
 <style>
-:root {
-  --black: #080808;
-  --white: #f5f2ee;
-  --gold: #c9a84c;
-  --gold-light: #e8c96a;
-  --gold-dim: #8a6e2f;
-  --gray: #1a1a1a;
-  --gray-mid: #2e2e2e;
-  --gray-light: #888;
-  --red: #c0392b;
-  --font-display: 'Bebas Neue', sans-serif;
-  --font-cond: 'Barlow Condensed', sans-serif;
-  --font-body: 'Barlow', sans-serif;
+:root{
+  --bg:#111213;--bg2:#161819;--bg3:#1c1e20;--surface:#212426;
+  --line:rgba(255,255,255,.07);--line2:rgba(255,255,255,.12);
+  --white:#f0efed;--off:#b8b5b0;--dim:#6a6866;
+  --ink:#9b59ff;--ink2:#bb86ff;--ink3:rgba(123,136,255,.12);--ink4:rgba(123,136,255,.06);
+  --font-serif:'DM Serif Display',serif;--font-sans:'DM Sans',sans-serif;--font-syne:'Syne',sans-serif;
 }
-
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
 html{scroll-behavior:smooth;}
-body{
-  background:var(--black);
-  color:var(--white);
-  font-family:var(--font-body);
-  font-weight:300;
-  overflow-x:hidden;
-}
+body{background:var(--bg);color:var(--white);font-family:var(--font-sans);font-weight:300;overflow-x:hidden;-webkit-font-smoothing:antialiased;}
+body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:999;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)' opacity='0.035'/%3E%3C/svg%3E");opacity:.5;}
 
-/* NOISE OVERLAY */
-body::before{
-  content:'';
-  position:fixed;
-  inset:0;
-  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
-  pointer-events:none;
-  z-index:1000;
-  opacity:.4;
-}
-
-/* NAV */
-nav{
-  position:fixed;top:0;left:0;right:0;z-index:900;
-  display:flex;align-items:center;justify-content:space-between;
-  padding:0 4vw;
-  height:72px;
-  border-bottom:1px solid rgba(201,168,76,.12);
-  backdrop-filter:blur(18px) saturate(120%);
-  background:rgba(8,8,8,.7);
-  transition:background .3s;
-}
-.nav-logo{
-  font-family:var(--font-display);
-  font-size:1.7rem;
-  letter-spacing:.15em;
-  color:var(--gold);
-  text-decoration:none;
-}
-.nav-logo span{color:var(--white);}
-.nav-links{
-  display:flex;gap:2.5rem;
-  list-style:none;
-}
-.nav-links a{
-  font-family:var(--font-cond);
-  font-size:.85rem;
-  letter-spacing:.18em;
-  text-transform:uppercase;
-  color:var(--gray-light);
-  text-decoration:none;
-  transition:color .2s;
-  position:relative;
-}
-.nav-links a::after{
-  content:'';position:absolute;bottom:-4px;left:0;width:0;height:1px;
-  background:var(--gold);transition:width .3s;
-}
-.nav-links a:hover{color:var(--white);}
-.nav-links a:hover::after{width:100%;}
-.nav-cta{
-  font-family:var(--font-cond);
-  font-size:.8rem;letter-spacing:.2em;text-transform:uppercase;
-  color:var(--black);background:var(--gold);
-  padding:.55rem 1.4rem;text-decoration:none;
-  border:1px solid var(--gold);
-  transition:background .2s,color .2s;
-}
-.nav-cta:hover{background:transparent;color:var(--gold);}
-
-/* HAMBURGER */
+nav{position:fixed;top:0;left:0;right:0;z-index:900;height:68px;display:flex;align-items:center;padding:0 5vw;border-bottom:1px solid var(--line);background:rgba(17,18,19,.85);backdrop-filter:blur(20px) saturate(150%);}
+.nav-logo{font-family:var(--font-syne);font-weight:800;font-size:1.1rem;letter-spacing:.08em;text-transform:uppercase;color:var(--white);text-decoration:none;display:flex;align-items:center;gap:.5rem;}
+.nav-logo .dot{width:8px;height:8px;border-radius:50%;background:var(--ink);box-shadow:0 0 12px var(--ink);}
+.nav-center{flex:1;display:flex;justify-content:center;gap:3rem;list-style:none;}
+.nav-center a{font-family:var(--font-sans);font-size:.78rem;font-weight:400;letter-spacing:.06em;color:var(--dim);text-decoration:none;transition:.25s;}
+.nav-center a:hover{color:var(--white);}
+.nav-right{display:flex;align-items:center;gap:1.5rem;}
+.nav-btn{font-family:var(--font-syne);font-size:.72rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;padding:.5rem 1.3rem;border:1px solid var(--ink);color:var(--ink);text-decoration:none;transition:.25s;background:transparent;}
+.nav-btn:hover{background:var(--ink);color:var(--bg);}
 .hamburger{display:none;flex-direction:column;gap:5px;background:none;border:none;padding:4px;cursor:pointer;}
-.hamburger span{width:24px;height:1.5px;background:var(--white);display:block;transition:.3s;}
-
-/* HERO */
-.hero{
-  position:relative;
-  min-height:100vh;
-  display:flex;flex-direction:column;justify-content:flex-end;
-  overflow:hidden;
-  padding:0 6vw 10vh;
-}
-.hero-bg{
-  position:absolute;inset:0;
-  background:#0a0a0a;
-  overflow:hidden;
-}
-.hero-img{
-  width:100%;height:100%;object-fit:cover;
-  opacity:.45;
-  display:block;
-}
-.hero-img-ph{
-  /* placeholder gradient until real photo */
-  width:100%;height:100%;
-  background:linear-gradient(135deg,#0a0a0a 0%,#1a1208 40%,#0d0d0d 100%);
-}
-.hero-overlay{
-  position:absolute;inset:0;
-  background:linear-gradient(to top, rgba(8,8,8,1) 0%, rgba(8,8,8,.3) 50%, rgba(8,8,8,.05) 100%);
-}
-.hero-tag{
-  position:relative;z-index:2;
-  display:inline-flex;align-items:center;gap:.7rem;
-  font-family:var(--font-cond);font-size:.75rem;letter-spacing:.3em;text-transform:uppercase;
-  color:var(--gold);margin-bottom:1.5rem;
-}
-.hero-tag::before{content:'';width:40px;height:1px;background:var(--gold);}
-.hero-title{
-  position:relative;z-index:2;
-  font-family:var(--font-display);
-  font-size:clamp(4.5rem,12vw,11rem);
-  line-height:.92;
-  letter-spacing:.03em;
-  color:var(--white);
-  max-width:900px;
-}
-.hero-title em{
-  font-style:normal;
-  -webkit-text-stroke:1px var(--gold);
-  color:transparent;
-}
-.hero-sub{
-  position:relative;z-index:2;
-  font-size:1.05rem;font-weight:300;color:var(--gray-light);
-  max-width:480px;margin:1.8rem 0 2.8rem;
-  line-height:1.7;
-}
-.hero-actions{
-  position:relative;z-index:2;
-  display:flex;gap:1.2rem;flex-wrap:wrap;
-  align-items:center;
-}
-.btn-primary{
-  font-family:var(--font-cond);font-size:.85rem;letter-spacing:.2em;text-transform:uppercase;
-  padding:.9rem 2.2rem;
-  background:var(--gold);color:var(--black);
-  text-decoration:none;border:1px solid var(--gold);
-  transition:.2s;
-}
-.btn-primary:hover{background:transparent;color:var(--gold);}
-.btn-ghost{
-  font-family:var(--font-cond);font-size:.85rem;letter-spacing:.2em;text-transform:uppercase;
-  padding:.9rem 2.2rem;
-  background:transparent;color:var(--white);
-  text-decoration:none;border:1px solid rgba(255,255,255,.2);
-  transition:.2s;
-}
-.btn-ghost:hover{border-color:var(--white);}
-
-/* HERO SCROLL INDICATOR */
-.scroll-hint{
-  position:absolute;bottom:3vh;right:6vw;z-index:2;
-  display:flex;flex-direction:column;align-items:center;gap:.5rem;
-  font-family:var(--font-cond);font-size:.65rem;letter-spacing:.25em;text-transform:uppercase;color:var(--gray-light);
-}
-.scroll-line{width:1px;height:60px;background:linear-gradient(to bottom,var(--gold),transparent);animation:scrollLine 2s ease-in-out infinite;}
-@keyframes scrollLine{0%,100%{opacity:.3;transform:scaleY(1);}50%{opacity:1;transform:scaleY(.6) translateY(20px);}}
-
-/* STATS BAR */
-.stats-bar{
-  background:var(--gray);
-  border-top:1px solid rgba(201,168,76,.15);
-  border-bottom:1px solid rgba(201,168,76,.15);
-  display:flex;
-}
-.stat-item{
-  flex:1;padding:2.5rem 2rem;
-  text-align:center;
-  border-right:1px solid rgba(201,168,76,.1);
-}
-.stat-item:last-child{border-right:none;}
-.stat-num{
-  font-family:var(--font-display);font-size:3rem;color:var(--gold);
-  display:block;line-height:1;
-}
-.stat-label{
-  font-family:var(--font-cond);font-size:.7rem;letter-spacing:.25em;text-transform:uppercase;
-  color:var(--gray-light);margin-top:.5rem;display:block;
-}
-
-/* SECTIONS */
-.section{padding:9rem 6vw;}
-.section-tag{
-  font-family:var(--font-cond);font-size:.7rem;letter-spacing:.35em;text-transform:uppercase;
-  color:var(--gold);margin-bottom:1rem;display:flex;align-items:center;gap:.7rem;
-}
-.section-tag::before{content:'';width:30px;height:1px;background:var(--gold);}
-.section-title{
-  font-family:var(--font-display);font-size:clamp(2.5rem,5vw,5rem);
-  line-height:1;letter-spacing:.04em;
-  color:var(--white);margin-bottom:1rem;
-}
-.section-body{
-  font-size:1rem;font-weight:300;color:var(--gray-light);
-  max-width:520px;line-height:1.75;
-}
-
-/* VIDEO SECTION */
-.video-section{
-  padding:0 0 9rem;
-  position:relative;
-}
-.video-section-inner{
-  margin:0 6vw;
-  display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;
-}
-.video-text{}
-.video-embed{
-  position:relative;
-  aspect-ratio:16/9;
-  background:var(--gray);
-  border:1px solid rgba(201,168,76,.2);
-  overflow:hidden;
-}
-.video-embed iframe{
-  position:absolute;inset:0;width:100%;height:100%;border:none;
-}
-.video-placeholder{
-  position:absolute;inset:0;
-  display:flex;flex-direction:column;align-items:center;justify-content:center;
-  gap:1rem;
-  background:linear-gradient(135deg,#111 0%,#1a1208 100%);
-}
-.video-play-btn{
-  width:72px;height:72px;border-radius:50%;
-  border:1px solid var(--gold);
-  display:flex;align-items:center;justify-content:center;
-  color:var(--gold);font-size:1.5rem;
-  transition:.3s;
-}
-.video-play-btn:hover{background:var(--gold);color:var(--black);}
-.video-placeholder p{
-  font-family:var(--font-cond);font-size:.75rem;letter-spacing:.2em;text-transform:uppercase;
-  color:var(--gray-light);
-}
-.video-upload-note{
-  font-family:var(--font-cond);font-size:.7rem;letter-spacing:.15em;
-  color:var(--gold-dim);margin-top:1rem;border:1px dashed var(--gold-dim);
-  padding:.6rem 1rem;display:inline-block;
-}
-
-/* PRODUCTS GRID */
-.products-section{
-  padding:9rem 6vw;
-  background:var(--gray);
-  border-top:1px solid rgba(201,168,76,.1);
-}
-.products-grid{
-  display:grid;grid-template-columns:repeat(3,1fr);gap:2px;
-  margin-top:4rem;
-}
-.product-card{
-  position:relative;overflow:hidden;
-  background:var(--black);
-  border:1px solid rgba(201,168,76,.08);
-  text-decoration:none;color:inherit;
-  display:block;
-  transition:border-color .3s;
-}
-.product-card:hover{border-color:rgba(201,168,76,.4);}
-.product-card-img{
-  aspect-ratio:4/3;
-  background:var(--gray-mid);
-  overflow:hidden;position:relative;
-}
-.product-card-img img{
-  width:100%;height:100%;object-fit:cover;
-  transition:transform .6s ease;
-}
-.product-card:hover .product-card-img img{transform:scale(1.05);}
-.product-card-img-ph{
-  width:100%;height:100%;
-  display:flex;align-items:center;justify-content:center;
-  background:linear-gradient(135deg,#111,#1c1c1c);
-}
-.product-card-img-ph svg{opacity:.2;}
-.product-card-body{padding:2rem;}
-.product-badge{
-  font-family:var(--font-cond);font-size:.65rem;letter-spacing:.25em;text-transform:uppercase;
-  color:var(--gold);margin-bottom:.8rem;display:block;
-}
-.product-name{
-  font-family:var(--font-display);font-size:1.8rem;letter-spacing:.06em;
-  color:var(--white);margin-bottom:.7rem;line-height:1;
-}
-.product-desc{
-  font-size:.9rem;color:var(--gray-light);line-height:1.65;margin-bottom:1.5rem;
-}
-.product-price{
-  font-family:var(--font-cond);font-size:1.6rem;font-weight:600;
-  color:var(--white);margin-bottom:1.2rem;
-}
-.product-price span{font-size:.8rem;font-weight:400;color:var(--gray-light);letter-spacing:.1em;}
-.product-arrow{
-  font-family:var(--font-cond);font-size:.75rem;letter-spacing:.2em;text-transform:uppercase;
-  color:var(--gold);display:flex;align-items:center;gap:.5rem;
-  transition:gap .2s;
-}
-.product-card:hover .product-arrow{gap:1rem;}
-
-/* WHY US */
-.why-grid{
-  display:grid;grid-template-columns:repeat(4,1fr);gap:1px;
-  margin-top:5rem;background:rgba(201,168,76,.08);
-}
-.why-item{
-  background:var(--black);
-  padding:3rem 2.5rem;
-  border:1px solid rgba(201,168,76,.08);
-}
-.why-icon{
-  font-size:2rem;margin-bottom:1.5rem;
-  color:var(--gold);
-}
-.why-title{
-  font-family:var(--font-cond);font-size:1.1rem;letter-spacing:.12em;text-transform:uppercase;
-  color:var(--white);margin-bottom:.8rem;
-}
-.why-text{font-size:.88rem;color:var(--gray-light);line-height:1.7;}
-
-/* PROCESS SECTION */
-.process-section{
-  background:var(--black);
-  padding:9rem 6vw;
-}
-.process-steps{
-  display:flex;gap:0;
-  margin-top:5rem;
-  position:relative;
-}
-.process-steps::before{
-  content:'';
-  position:absolute;top:2.5rem;left:0;right:0;height:1px;
-  background:linear-gradient(to right,transparent,var(--gold-dim),transparent);
-}
-.process-step{
-  flex:1;padding:0 2rem;
-  position:relative;
-}
-.step-num{
-  font-family:var(--font-display);font-size:5rem;
-  -webkit-text-stroke:1px rgba(201,168,76,.2);
-  color:transparent;
-  position:absolute;top:-1.5rem;right:1rem;
-  pointer-events:none;
-}
-.step-dot{
-  width:16px;height:16px;border-radius:50%;
-  border:1px solid var(--gold);background:var(--black);
-  position:relative;z-index:1;
-  margin-bottom:2rem;
-}
-.step-dot::after{
-  content:'';position:absolute;inset:3px;border-radius:50%;background:var(--gold);
-}
-.step-title{
-  font-family:var(--font-cond);font-size:1.1rem;letter-spacing:.12em;text-transform:uppercase;
-  color:var(--white);margin-bottom:.7rem;
-}
-.step-text{font-size:.88rem;color:var(--gray-light);line-height:1.65;}
-
-/* PHOTO STRIP */
-.photo-strip{
-  display:grid;grid-template-columns:2fr 1fr 1fr;
-  grid-template-rows:auto auto;
-  gap:2px;
-  height:600px;
-  overflow:hidden;
-}
-.strip-photo{
-  background:var(--gray-mid);
-  overflow:hidden;
-}
-.strip-photo.large{grid-row:1/3;}
-.strip-photo img{width:100%;height:100%;object-fit:cover;}
-.strip-photo-ph{
-  width:100%;height:100%;
-  background:linear-gradient(135deg,#111,#1c1c1c);
-  display:flex;align-items:center;justify-content:center;
-  font-family:var(--font-cond);font-size:.7rem;letter-spacing:.2em;color:rgba(255,255,255,.15);
-}
-
-/* TESTIMONIALS */
-.testimonials-section{
-  padding:9rem 6vw;
-  background:var(--gray);
-}
-.testimonials-grid{
-  display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;
-  margin-top:4rem;
-}
-.testimonial{
-  padding:2.5rem;
-  border:1px solid rgba(201,168,76,.12);
-  background:var(--black);
-  position:relative;
-}
-.testimonial::before{
-  content:'"';
-  font-family:var(--font-display);font-size:8rem;
-  color:var(--gold);opacity:.08;
-  position:absolute;top:-1rem;left:1.5rem;
-  line-height:1;
-}
-.testimonial-text{
-  font-size:.95rem;color:var(--gray-light);
-  line-height:1.75;font-style:italic;
-  margin-bottom:1.8rem;
-  position:relative;z-index:1;
-}
-.testimonial-author{
-  display:flex;align-items:center;gap:1rem;
-}
-.author-avatar{
-  width:44px;height:44px;border-radius:50%;
-  background:var(--gray-mid);border:1px solid var(--gold-dim);
-  display:flex;align-items:center;justify-content:center;
-  font-family:var(--font-cond);font-size:.9rem;color:var(--gold);
-  font-weight:600;
-}
-.author-name{
-  font-family:var(--font-cond);font-size:.85rem;letter-spacing:.1em;text-transform:uppercase;
-  color:var(--white);
-}
-.author-meta{font-size:.78rem;color:var(--gray-light);}
-.stars{color:var(--gold);font-size:.8rem;letter-spacing:.1em;margin-bottom:.3rem;}
-
-/* CTA BAND */
-.cta-band{
-  padding:8rem 6vw;
-  background:var(--black);
-  text-align:center;
-  border-top:1px solid rgba(201,168,76,.1);
-  border-bottom:1px solid rgba(201,168,76,.1);
-  position:relative;overflow:hidden;
-}
-.cta-band::before{
-  content:'APEX';
-  font-family:var(--font-display);font-size:20vw;
-  position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
-  -webkit-text-stroke:1px rgba(201,168,76,.04);
-  color:transparent;
-  pointer-events:none;white-space:nowrap;
-}
-.cta-band .section-title{margin-bottom:1.5rem;}
-.cta-band .section-body{margin:0 auto 3rem;text-align:center;}
-.cta-band .btn-primary{font-size:.95rem;padding:1.1rem 3rem;}
-
-/* FOOTER */
-footer{
-  background:var(--gray);
-  border-top:1px solid rgba(201,168,76,.12);
-  padding:5rem 6vw 3rem;
-}
-.footer-top{
-  display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:4rem;
-  margin-bottom:4rem;
-}
-.footer-brand{}
-.footer-logo{
-  font-family:var(--font-display);font-size:2rem;
-  letter-spacing:.15em;color:var(--gold);
-  display:block;margin-bottom:1rem;text-decoration:none;
-}
-.footer-logo span{color:var(--white);}
-.footer-tagline{font-size:.88rem;color:var(--gray-light);line-height:1.7;max-width:260px;}
-.footer-col-title{
-  font-family:var(--font-cond);font-size:.75rem;letter-spacing:.25em;text-transform:uppercase;
-  color:var(--gold);margin-bottom:1.5rem;
-}
-.footer-links{list-style:none;}
-.footer-links li{margin-bottom:.7rem;}
-.footer-links a{
-  font-size:.88rem;color:var(--gray-light);text-decoration:none;transition:color .2s;
-}
-.footer-links a:hover{color:var(--white);}
-.footer-bottom{
-  border-top:1px solid rgba(201,168,76,.08);
-  padding-top:2rem;
-  display:flex;justify-content:space-between;align-items:center;
-}
-.footer-copy{font-size:.78rem;color:var(--gray-light);letter-spacing:.05em;}
-.footer-social{display:flex;gap:1.2rem;}
-.social-link{
-  width:38px;height:38px;border:1px solid rgba(201,168,76,.2);
-  display:flex;align-items:center;justify-content:center;
-  color:var(--gray-light);text-decoration:none;font-size:.85rem;
-  transition:.2s;
-}
-.social-link:hover{border-color:var(--gold);color:var(--gold);}
-
-/* MOBILE NAV */
-.mobile-menu{
-  display:none;position:fixed;inset:0;z-index:850;
-  background:rgba(8,8,8,.97);
-  flex-direction:column;align-items:center;justify-content:center;gap:2rem;
-  backdrop-filter:blur(10px);
-}
+.hamburger span{width:22px;height:1px;background:var(--white);display:block;}
+.mobile-menu{display:none;position:fixed;inset:0;z-index:850;background:rgba(17,18,19,.98);flex-direction:column;align-items:center;justify-content:center;gap:2.5rem;backdrop-filter:blur(10px);}
 .mobile-menu.open{display:flex;}
-.mobile-menu a{
-  font-family:var(--font-display);font-size:3rem;letter-spacing:.08em;
-  color:var(--white);text-decoration:none;transition:.2s;
-}
-.mobile-menu a:hover{color:var(--gold);}
-.mobile-close{
-  position:absolute;top:2rem;right:2rem;
-  background:none;border:none;color:var(--white);
-  font-size:1.8rem;cursor:pointer;
-}
+.mobile-menu a{font-family:var(--font-syne);font-size:2.5rem;font-weight:700;color:var(--white);text-decoration:none;letter-spacing:.05em;transition:.2s;}
+.mobile-menu a:hover{color:var(--ink);}
+.mobile-close{position:absolute;top:2rem;right:2rem;background:none;border:none;color:var(--white);font-size:1.5rem;cursor:pointer;}
 
-/* RESPONSIVE */
-@media(max-width:1024px){
-  .why-grid{grid-template-columns:1fr 1fr;}
-  .process-steps{flex-direction:column;gap:3rem;}
-  .process-steps::before{display:none;}
-  .footer-top{grid-template-columns:1fr 1fr;gap:3rem;}
+.hero{min-height:100vh;display:grid;grid-template-columns:1fr 1fr;position:relative;overflow:hidden;}
+.hero-left{display:flex;flex-direction:column;justify-content:flex-end;padding:10rem 5vw 8rem;position:relative;z-index:2;border-right:1px solid var(--line);}
+.hero-eyebrow{font-family:var(--font-syne);font-size:.68rem;font-weight:500;letter-spacing:.3em;text-transform:uppercase;color:var(--ink);margin-bottom:2.5rem;display:flex;align-items:center;gap:.8rem;}
+.hero-eyebrow::before{content:'';width:24px;height:1px;background:var(--ink);}
+.hero-h1{font-family:var(--font-serif);font-size:clamp(4rem,7.5vw,8.5rem);line-height:.95;color:var(--white);margin-bottom:3rem;letter-spacing:-.01em;}
+.hero-h1 em{font-style:italic;color:var(--ink2);}
+.hero-body{font-size:.95rem;font-weight:300;color:var(--off);max-width:380px;line-height:1.8;margin-bottom:3.5rem;}
+.hero-actions{display:flex;gap:1rem;flex-wrap:wrap;}
+.btn-fill{font-family:var(--font-syne);font-size:.72rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;padding:.85rem 2rem;background:var(--ink);color:var(--bg);text-decoration:none;border:1px solid var(--ink);transition:.25s;}
+.btn-fill:hover{background:transparent;color:var(--ink);}
+.btn-line{font-family:var(--font-syne);font-size:.72rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;padding:.85rem 2rem;background:transparent;color:var(--off);text-decoration:none;border:1px solid var(--line2);transition:.25s;}
+.btn-line:hover{border-color:var(--white);color:var(--white);}
+.hero-right{position:relative;overflow:hidden;background:var(--bg2);}
+.hero-img-wrap{position:absolute;inset:0;}
+.hero-img-wrap img{width:100%;height:100%;object-fit:cover;opacity:.55;mix-blend-mode:luminosity;}
+.hero-gradient{position:absolute;inset:0;background:linear-gradient(to right,var(--bg) 0%,transparent 35%),linear-gradient(to top,var(--bg) 0%,transparent 30%);}
+.hero-img-ph{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#161819,#1c1e20);}
+
+.marquee-wrap{overflow:hidden;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:.9rem 0;background:var(--bg2);}
+.marquee-track{display:flex;gap:4rem;width:max-content;animation:marquee 28s linear infinite;}
+.marquee-track span{font-family:var(--font-syne);font-size:.68rem;font-weight:500;letter-spacing:.25em;text-transform:uppercase;color:var(--dim);white-space:nowrap;}
+.marquee-track span.accent{color:var(--ink);}
+@keyframes marquee{from{transform:translateX(0);}to{transform:translateX(-50%)}}
+
+.intro-split{display:grid;grid-template-columns:1fr 1fr;gap:0;border-top:1px solid var(--line);}
+.intro-left{padding:8rem 5vw;border-right:1px solid var(--line);}
+.intro-right{padding:8rem 5vw;display:flex;flex-direction:column;justify-content:flex-end;}
+.intro-stat-row{display:grid;grid-template-columns:1fr 1fr;gap:1px;margin-top:4rem;border:1px solid var(--line);background:var(--line);}
+.stat-box{background:var(--bg);padding:2.5rem 2rem;}
+.stat-n{font-family:var(--font-syne);font-size:2.8rem;font-weight:800;color:var(--white);line-height:1;display:block;margin-bottom:.3rem;}
+.stat-n span{color:var(--ink);}
+.stat-l{font-family:var(--font-sans);font-size:.78rem;color:var(--dim);letter-spacing:.04em;}
+
+.label{font-family:var(--font-syne);font-size:.66rem;font-weight:600;letter-spacing:.3em;text-transform:uppercase;color:var(--ink);margin-bottom:1.2rem;display:flex;align-items:center;gap:.7rem;}
+.label::before{content:'';width:20px;height:1px;background:var(--ink);}
+.h2{font-family:var(--font-serif);font-size:clamp(2.8rem,5vw,6rem);line-height:1;color:var(--white);letter-spacing:-.01em;}
+.h2 em{font-style:italic;color:var(--ink2);}
+.body-text{font-size:.92rem;color:var(--off);line-height:1.85;font-weight:300;}
+
+.collage{display:grid;grid-template-columns:3fr 2fr 2fr;grid-template-rows:300px 300px;gap:1px;background:var(--line);border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
+.col-cell{background:var(--bg2);overflow:hidden;position:relative;}
+.col-cell.span2{grid-row:1/3;}
+.col-cell img{width:100%;height:100%;object-fit:cover;opacity:.65;mix-blend-mode:luminosity;transition:opacity .5s,transform .6s;}
+.col-cell:hover img{opacity:.85;transform:scale(1.03);}
+.col-ph{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-family:var(--font-syne);font-size:.6rem;letter-spacing:.2em;color:rgba(255,255,255,.08);}
+.col-label{position:absolute;bottom:1.2rem;left:1.2rem;font-family:var(--font-syne);font-size:.6rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--ink);background:rgba(17,18,19,.7);padding:.3rem .6rem;backdrop-filter:blur(4px);}
+
+.products-s{border-top:1px solid var(--line);}
+.products-header{padding:6rem 5vw 4rem;display:flex;align-items:flex-end;justify-content:space-between;border-bottom:1px solid var(--line);}
+.products-header-right{font-size:.85rem;color:var(--dim);max-width:320px;line-height:1.7;text-align:right;}
+.product-row{display:grid;grid-template-columns:80px 110px 1fr auto;align-items:center;gap:3rem;padding:3rem 5vw;border-bottom:1px solid var(--line);text-decoration:none;color:inherit;transition:background .25s;position:relative;overflow:hidden;}
+.product-row::before{content:'';position:absolute;left:0;top:0;bottom:0;width:0;background:var(--ink3);transition:width .4s ease;}
+.product-row:hover::before{width:100%;}
+.product-row:hover{background:var(--ink4);}
+.pr-num{font-family:var(--font-syne);font-size:.68rem;font-weight:600;letter-spacing:.15em;color:var(--dim);}
+.pr-img{width:110px;height:75px;background:var(--surface);overflow:hidden;border:1px solid var(--line);}
+.pr-img img{width:100%;height:100%;object-fit:cover;opacity:.7;mix-blend-mode:luminosity;}
+.pr-tag{font-family:var(--font-syne);font-size:.6rem;font-weight:500;letter-spacing:.22em;text-transform:uppercase;color:var(--ink);margin-bottom:.4rem;}
+.pr-name{font-family:var(--font-serif);font-size:1.8rem;color:var(--white);line-height:1;}
+.pr-desc{font-size:.82rem;color:var(--dim);line-height:1.6;max-width:400px;margin-top:.4rem;}
+.pr-right{display:flex;align-items:center;gap:2rem;}
+.pr-price{font-family:var(--font-syne);font-size:1.3rem;font-weight:700;color:var(--white);white-space:nowrap;text-align:right;}
+.pr-price small{font-size:.7rem;font-weight:400;color:var(--dim);}
+.pr-arrow{font-family:var(--font-syne);font-size:.68rem;font-weight:600;letter-spacing:.15em;color:var(--ink);white-space:nowrap;transition:letter-spacing .2s;}
+.product-row:hover .pr-arrow{letter-spacing:.22em;}
+
+.video-s{display:grid;grid-template-columns:1fr 1fr;border-top:1px solid var(--line);}
+.video-text-side{padding:8rem 5vw;border-right:1px solid var(--line);display:flex;flex-direction:column;justify-content:center;}
+.video-embed-side{background:var(--bg2);display:flex;align-items:center;justify-content:center;min-height:400px;}
+.video-frame{width:100%;aspect-ratio:16/9;background:var(--bg3);position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:1.2rem;}
+.video-frame iframe{position:absolute;inset:0;width:100%;height:100%;border:none;}
+.play-ring{width:80px;height:80px;border-radius:50%;border:1px solid var(--ink);display:flex;align-items:center;justify-content:center;color:var(--ink);font-size:1.4rem;transition:.3s;cursor:pointer;}
+.play-ring:hover{background:var(--ink);color:var(--bg);}
+.video-note{font-family:var(--font-syne);font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;color:var(--dim);}
+.video-upload{font-family:var(--font-syne);font-size:.62rem;letter-spacing:.12em;color:var(--ink);border:1px dashed rgba(123,136,255,.3);padding:.5rem 1rem;margin-top:1.5rem;display:inline-block;}
+
+.why-s{border-top:1px solid var(--line);display:grid;grid-template-columns:1fr 3fr;}
+.why-sticky{padding:6rem 4vw;border-right:1px solid var(--line);position:sticky;top:68px;height:fit-content;}
+.why-items{padding:6rem 5vw;}
+.why-item{display:grid;grid-template-columns:60px 1fr;gap:2rem;align-items:start;padding:3rem 0;border-bottom:1px solid var(--line);}
+.why-item:first-child{padding-top:0;}
+.why-item:last-child{border-bottom:none;}
+.why-num{font-family:var(--font-syne);font-size:2.5rem;font-weight:800;color:var(--line2);line-height:1;}
+.why-title{font-family:var(--font-serif);font-size:1.6rem;color:var(--white);margin-bottom:.6rem;}
+.why-body{font-size:.88rem;color:var(--off);line-height:1.75;}
+
+.process-s{border-top:1px solid var(--line);background:var(--bg2);}
+.process-inner{padding:8rem 5vw;}
+.process-grid{display:grid;grid-template-columns:repeat(4,1fr);margin-top:5rem;border:1px solid var(--line);background:var(--line);}
+.process-cell{background:var(--bg2);padding:3rem 2.5rem;}
+.pc-step{font-family:var(--font-syne);font-size:.6rem;font-weight:600;letter-spacing:.25em;text-transform:uppercase;color:var(--ink);margin-bottom:1.5rem;display:flex;align-items:center;gap:.5rem;}
+.pc-step::before{content:'';width:20px;height:1px;background:var(--ink);}
+.pc-title{font-family:var(--font-serif);font-size:1.5rem;color:var(--white);margin-bottom:.8rem;}
+.pc-body{font-size:.83rem;color:var(--dim);line-height:1.7;}
+
+.test-s{border-top:1px solid var(--line);}
+.test-header{padding:6rem 5vw 5rem;border-bottom:1px solid var(--line);}
+.test-grid{display:grid;grid-template-columns:repeat(3,1fr);background:var(--line);gap:1px;}
+.test-card{background:var(--bg);padding:3.5rem 3rem;}
+.test-stars{font-size:.8rem;color:var(--ink);letter-spacing:.1em;margin-bottom:1.8rem;}
+.test-quote{font-family:var(--font-serif);font-style:italic;font-size:1.1rem;color:var(--white);line-height:1.65;margin-bottom:2rem;}
+.test-author-name{font-family:var(--font-syne);font-size:.75rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--white);margin-bottom:.2rem;}
+.test-author-role{font-size:.78rem;color:var(--dim);}
+
+.cta-s{border-top:1px solid var(--line);padding:10rem 5vw;text-align:center;position:relative;overflow:hidden;background:var(--bg2);}
+.cta-glow{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:600px;height:300px;background:radial-gradient(ellipse,rgba(123,136,255,.08) 0%,transparent 70%);pointer-events:none;}
+.cta-h{font-family:var(--font-serif);font-size:clamp(3rem,6vw,7rem);line-height:.95;color:var(--white);margin-bottom:2rem;position:relative;}
+.cta-h em{font-style:italic;color:var(--ink2);}
+.cta-sub{font-size:.95rem;color:var(--off);max-width:420px;margin:0 auto 3rem;line-height:1.7;}
+.btn-lg{font-family:var(--font-syne);font-size:.8rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;padding:1.1rem 3rem;background:var(--ink);color:var(--bg);text-decoration:none;border:1px solid var(--ink);transition:.25s;display:inline-block;}
+.btn-lg:hover{background:transparent;color:var(--ink);}
+
+footer{border-top:1px solid var(--line);padding:6rem 5vw 3rem;background:var(--bg);}
+.ft{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:4rem;margin-bottom:5rem;}
+.ft-logo{font-family:var(--font-syne);font-weight:800;font-size:1.1rem;letter-spacing:.08em;text-transform:uppercase;color:var(--white);text-decoration:none;display:flex;align-items:center;gap:.5rem;margin-bottom:1.2rem;}
+.ft-logo .dot{width:8px;height:8px;border-radius:50%;background:var(--ink);box-shadow:0 0 10px var(--ink);}
+.ft-tag{font-size:.85rem;color:var(--dim);line-height:1.7;max-width:240px;}
+.ft-col-title{font-family:var(--font-syne);font-size:.64rem;font-weight:600;letter-spacing:.28em;text-transform:uppercase;color:var(--ink);margin-bottom:1.5rem;}
+.ft-links{list-style:none;}
+.ft-links li{margin-bottom:.65rem;}
+.ft-links a{font-size:.83rem;color:var(--dim);text-decoration:none;transition:.2s;}
+.ft-links a:hover{color:var(--white);}
+.ft-bottom{border-top:1px solid var(--line);padding-top:2rem;display:flex;justify-content:space-between;align-items:center;}
+.ft-copy{font-size:.72rem;color:var(--dim);}
+.ft-social{display:flex;gap:1rem;}
+.ft-soc{width:36px;height:36px;border:1px solid var(--line2);display:flex;align-items:center;justify-content:center;color:var(--dim);text-decoration:none;font-size:.78rem;transition:.2s;}
+.ft-soc:hover{border-color:var(--ink);color:var(--ink);}
+
+.r{opacity:0;transform:translateY(24px);transition:opacity .9s ease,transform .9s ease;}
+.r.on{opacity:1;transform:none;}
+.rl{opacity:0;transform:translateX(-24px);transition:opacity .9s ease,transform .9s ease;}
+.rl.on{opacity:1;transform:none;}
+
+@media(max-width:1100px){
+  .hero{grid-template-columns:1fr;}
+  .hero-right{height:55vw;min-height:300px;}
+  .intro-split{grid-template-columns:1fr;}
+  .intro-left{border-right:none;border-bottom:1px solid var(--line);}
+  .why-s{grid-template-columns:1fr;}
+  .why-sticky{position:static;border-right:none;border-bottom:1px solid var(--line);}
+  .video-s{grid-template-columns:1fr;}
+  .video-text-side{border-right:none;border-bottom:1px solid var(--line);}
+  .process-grid{grid-template-columns:1fr 1fr;}
+  .ft{grid-template-columns:1fr 1fr;gap:3rem;}
+  .product-row{grid-template-columns:1fr auto;gap:1.5rem;}
+  .pr-num,.pr-img{display:none;}
 }
 @media(max-width:768px){
-  .nav-links,.nav-cta{display:none;}
+  .nav-center,.nav-btn{display:none;}
   .hamburger{display:flex;}
-  .products-grid{grid-template-columns:1fr;}
-  .testimonials-grid{grid-template-columns:1fr;}
-  .stats-bar{flex-wrap:wrap;}
-  .stat-item{flex:50%;border-right:none;border-bottom:1px solid rgba(201,168,76,.1);}
-  .photo-strip{grid-template-columns:1fr 1fr;grid-template-rows:auto;height:auto;}
-  .strip-photo.large{grid-row:auto;}
-  .video-section-inner{grid-template-columns:1fr;}
-  .footer-top{grid-template-columns:1fr;}
-  .why-grid{grid-template-columns:1fr;}
-  .footer-bottom{flex-direction:column;gap:1.5rem;text-align:center;}
+  .test-grid{grid-template-columns:1fr;}
+  .collage{grid-template-columns:1fr 1fr;grid-template-rows:auto;}
+  .col-cell.span2{grid-row:auto;}
+  .process-grid{grid-template-columns:1fr;}
+  .products-header{flex-direction:column;gap:2rem;align-items:flex-start;}
+  .products-header-right{text-align:left;}
+  .ft{grid-template-columns:1fr;}
+  .ft-bottom{flex-direction:column;gap:1.5rem;text-align:center;}
+  .hero-left{padding:8rem 5vw 5rem;}
+  .pr-right{flex-direction:column;align-items:flex-end;gap:.5rem;}
 }
-
-/* SCROLL ANIMATIONS */
-.reveal{opacity:0;transform:translateY(30px);transition:opacity .8s ease,transform .8s ease;}
-.reveal.visible{opacity:1;transform:none;}
-.reveal-left{opacity:0;transform:translateX(-30px);transition:opacity .8s ease,transform .8s ease;}
-.reveal-left.visible{opacity:1;transform:none;}
 </style>
 </head>
 <body>
-
-<!-- NAV -->
-<nav id="navbar">
-  <a href="index.html" class="nav-logo">APEX<span>SHIELD</span></a>
-  <ul class="nav-links">
+<nav>
+  <a href="index.html" class="nav-logo"><span class="dot"></span>APEX SHIELD</a>
+  <ul class="nav-center">
     <li><a href="index.html">Home</a></li>
     <li><a href="products.html">Products</a></li>
     <li><a href="contact.html">Contact</a></li>
-    <li><a href="products.html#apx-ppf">PPF Film</a></li>
-    <li><a href="products.html#tools">Tools</a></li>
   </ul>
-  <a href="products.html" class="nav-cta">Shop Now</a>
-  <button class="hamburger" id="hamburger" aria-label="Menu">
-    <span></span><span></span><span></span>
-  </button>
+  <div class="nav-right"><a href="products.html" class="nav-btn">Shop</a></div>
+  <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
 </nav>
-
-<!-- MOBILE MENU -->
 <div class="mobile-menu" id="mobileMenu">
   <button class="mobile-close" id="mobileClose">✕</button>
-  <a href="index.html" onclick="closeMobile()">Home</a>
-  <a href="products.html" onclick="closeMobile()">Products</a>
-  <a href="contact.html" onclick="closeMobile()">Contact</a>
+  <a href="index.html" onclick="document.getElementById('mobileMenu').classList.remove('open')">Home</a>
+  <a href="products.html" onclick="document.getElementById('mobileMenu').classList.remove('open')">Products</a>
+  <a href="contact.html" onclick="document.getElementById('mobileMenu').classList.remove('open')">Contact</a>
 </div>
 
-<!-- HERO -->
 <section class="hero">
-  <div class="hero-bg">
-    <img src="assets/1.png" alt="APX PPF Film" class="hero-img" onerror="this.style.display='none'"/>
-    <div class="hero-img-ph" id="heroPh"></div>
+  <div class="hero-left">
+    <div class="hero-eyebrow">Professional Paint Protection</div>
+    <h1 class="hero-h1">Defend<br/>your<br/><em>paint.</em></h1>
+    <p class="hero-body">Military-grade PPF film, precision application tools, and complete installer kits — for those who won't accept anything less than flawless.</p>
+    <div class="hero-actions">
+      <a href="products.html" class="btn-fill">Explore Products</a>
+      <a href="contact.html" class="btn-line">Get Expert Help</a>
+    </div>
   </div>
-  <div class="hero-overlay"></div>
-  <div class="hero-tag">Premium Paint Protection</div>
-  <h1 class="hero-title">DEFEND<br/>YOUR <em>PAINT</em></h1>
-  <p class="hero-sub">Professional-grade PPF films, precision application tools, and complete installation kits — built for those who demand flawless results.</p>
-  <div class="hero-actions">
-    <a href="products.html" class="btn-primary">Explore Products</a>
-    <a href="contact.html" class="btn-ghost">Get Expert Help</a>
-  </div>
-  <div class="scroll-hint">
-    <div class="scroll-line"></div>
-    Scroll
+  <div class="hero-right">
+    <div class="hero-img-wrap">
+      <img src="assets/1.png" alt="APX PPF Film" onerror="this.style.display='none'"/>
+      <div class="hero-gradient"></div>
+    </div>
+    <div class="hero-img-ph"></div>
   </div>
 </section>
 
-<!-- STATS -->
-<div class="stats-bar">
-  <div class="stat-item reveal"><span class="stat-num">10+</span><span class="stat-label">Years of R&D</span></div>
-  <div class="stat-item reveal"><span class="stat-num">99%</span><span class="stat-label">UV Protection Rate</span></div>
-  <div class="stat-item reveal"><span class="stat-num">500+</span><span class="stat-label">Detailers Trust Us</span></div>
-  <div class="stat-item reveal"><span class="stat-num">3</span><span class="stat-label">Complete Product Lines</span></div>
-</div>
-
-<!-- ABOUT / INTRO -->
-<section class="section">
-  <div style="display:grid;grid-template-columns:1fr 1fr;gap:8rem;align-items:center;">
-    <div class="reveal-left">
-      <div class="section-tag">Our Mission</div>
-      <h2 class="section-title">ARMOR FOR<br/>EVERY DETAIL</h2>
-      <p class="section-body" style="margin-bottom:1.5rem;">At APEX SHIELD, we believe every vehicle deserves protection that performs as flawlessly as it looks. From our self-healing APX PPF film to our precision wrap tools, every product is engineered to deliver professional results.</p>
-      <p class="section-body">Whether you're a seasoned installer or a passionate car owner, our products give you the edge — sharper edges, smoother finishes, and lasting protection.</p>
-      <div style="margin-top:2.5rem;display:flex;gap:3rem;">
-        <div>
-          <div style="font-family:var(--font-display);font-size:2.5rem;color:var(--gold);">Self</div>
-          <div style="font-family:var(--font-cond);font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gray-light);">Healing Film</div>
-        </div>
-        <div>
-          <div style="font-family:var(--font-display);font-size:2.5rem;color:var(--gold);">10yr</div>
-          <div style="font-family:var(--font-cond);font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gray-light);">Warranty</div>
-        </div>
-        <div>
-          <div style="font-family:var(--font-display);font-size:2.5rem;color:var(--gold);">Pro</div>
-          <div style="font-family:var(--font-cond);font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gray-light);">Grade Materials</div>
-        </div>
-      </div>
-    </div>
-    <div class="reveal" style="position:relative;">
-      <div style="aspect-ratio:4/5;background:var(--gray-mid);overflow:hidden;border:1px solid rgba(201,168,76,.12);">
-        <img src="assets/4.png" alt="PPF Application" style="width:100%;height:100%;object-fit:cover;" onerror="this.style.display='none'"/>
-        <div style="width:100%;height:100%;background:linear-gradient(135deg,#111,#1c1c1c);display:flex;align-items:center;justify-content:center;">
-          <span style="font-family:var(--font-cond);font-size:.7rem;letter-spacing:.2em;color:rgba(255,255,255,.1);">PHOTO PLACEHOLDER</span>
-        </div>
-      </div>
-      <div style="position:absolute;bottom:-2rem;left:-2rem;
-        background:var(--gold);color:var(--black);
-        padding:1.5rem 2rem;
-        font-family:var(--font-cond);font-weight:600;letter-spacing:.05em;font-size:.85rem;
-        max-width:200px;line-height:1.5;">
-        TRUSTED BY PROFESSIONAL DETAILERS WORLDWIDE
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- PHOTO STRIP -->
-<div class="photo-strip">
-  <div class="strip-photo large">
-    <img src="assets/2.png" alt="PPF Film" onerror="this.style.display='none'"/>
-    <div class="strip-photo-ph">PHOTO</div>
-  </div>
-  <div class="strip-photo">
-    <img src="assets/6.png" alt="Tools" onerror="this.style.display='none'"/>
-    <div class="strip-photo-ph">PHOTO</div>
-  </div>
-  <div class="strip-photo">
-    <img src="assets/11.png" alt="Kit" onerror="this.style.display='none'"/>
-    <div class="strip-photo-ph">PHOTO</div>
-  </div>
-  <div class="strip-photo">
-    <img src="assets/3.png" alt="Application" onerror="this.style.display='none'"/>
-    <div class="strip-photo-ph">PHOTO</div>
-  </div>
-  <div class="strip-photo">
-    <img src="assets/7.png" alt="Result" onerror="this.style.display='none'"/>
-    <div class="strip-photo-ph">PHOTO</div>
+<div class="marquee-wrap">
+  <div class="marquee-track">
+    <span>APX PPF Film</span><span class="accent">— Self-Healing Technology</span>
+    <span>Pro Wrap Tools</span><span class="accent">— Precision Engineered</span>
+    <span>Shield Pro Kit</span><span class="accent">— Complete System</span>
+    <span>10-Year Warranty</span><span class="accent">— Backed by Science</span>
+    <span>99.5% Optical Clarity</span><span class="accent">— Zero Yellowing</span>
+    <span>APX PPF Film</span><span class="accent">— Self-Healing Technology</span>
+    <span>Pro Wrap Tools</span><span class="accent">— Precision Engineered</span>
+    <span>Shield Pro Kit</span><span class="accent">— Complete System</span>
+    <span>10-Year Warranty</span><span class="accent">— Backed by Science</span>
+    <span>99.5% Optical Clarity</span><span class="accent">— Zero Yellowing</span>
   </div>
 </div>
 
-<!-- PRODUCTS PREVIEW -->
-<section class="products-section">
-  <div class="section-tag reveal">Our Products</div>
-  <h2 class="section-title reveal">BUILT FOR<br/>PERFECTION</h2>
-  <div class="products-grid">
-    <!-- Product 1: APX PPF -->
-    <a href="product.html?id=ppf" class="product-card reveal">
-      <div class="product-card-img">
-        <img src="assets/1.png" alt="APX PPF Film" onerror="this.style.display='none'"/>
-        <div class="product-card-img-ph">
-          <svg width="60" height="60" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <rect x="10" y="20" width="40" height="25" rx="1" stroke="#c9a84c" stroke-width="1.5"/>
-            <path d="M10 28h40M20 20v25" stroke="#c9a84c" stroke-width="1"/>
-          </svg>
-        </div>
-      </div>
-      <div class="product-card-body">
-        <span class="product-badge">PPF Film</span>
-        <div class="product-name">APX PPF FILM</div>
-        <p class="product-desc">Military-grade, self-healing paint protection film with 10-year warranty. Crystal-clear optical clarity with hydrophobic top coat.</p>
-        <div class="product-price">From $299 <span>/ roll</span></div>
-        <div class="product-arrow">View Product →</div>
-      </div>
-    </a>
-
-    <!-- Product 2: Tools -->
-    <a href="product.html?id=tools" class="product-card reveal">
-      <div class="product-card-img">
-        <img src="assets/6.png" alt="Pro Wrap Tools" onerror="this.style.display='none'"/>
-        <div class="product-card-img-ph">
-          <svg width="60" height="60" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <rect x="15" y="25" width="30" height="8" rx="1" stroke="#c9a84c" stroke-width="1.5"/>
-            <line x1="18" y1="25" x2="18" y2="33" stroke="#c9a84c" stroke-width="1"/>
-            <line x1="25" y1="20" x2="35" y2="20" stroke="#c9a84c" stroke-width="1.5"/>
-          </svg>
-        </div>
-      </div>
-      <div class="product-card-body">
-        <span class="product-badge">Application Tools</span>
-        <div class="product-name">PRO WRAP TOOLS</div>
-        <p class="product-desc">Complete set of professional-grade squeegees, felt edges, heat guns, knifeless tape, and precision applicators.</p>
-        <div class="product-price">From $89 <span>/ set</span></div>
-        <div class="product-arrow">View Product →</div>
-      </div>
-    </a>
-
-    <!-- Product 3: Full Kit -->
-    <a href="product.html?id=kit" class="product-card reveal">
-      <div class="product-card-img">
-        <img src="assets/11.png" alt="Complete Installer Kit" onerror="this.style.display='none'"/>
-        <div class="product-card-img-ph">
-          <svg width="60" height="60" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <rect x="8" y="22" width="44" height="28" rx="2" stroke="#c9a84c" stroke-width="1.5"/>
-            <path d="M20 22V18a10 10 0 0120 0v4" stroke="#c9a84c" stroke-width="1.5"/>
-            <circle cx="30" cy="36" r="4" stroke="#c9a84c" stroke-width="1.5"/>
-          </svg>
-        </div>
-      </div>
-      <div class="product-card-body">
-        <span class="product-badge" style="color:var(--gold-light);">★ Best Value</span>
-        <div class="product-name">SHIELD PRO KIT</div>
-        <p class="product-desc">Everything you need to start installing like a pro. APX PPF film + full tool set + installation guide + spray solution.</p>
-        <div class="product-price">From $349 <span>/ complete kit</span></div>
-        <div class="product-arrow">View Product →</div>
-      </div>
-    </a>
+<div class="intro-split">
+  <div class="intro-left r">
+    <div class="label">Our Philosophy</div>
+    <h2 class="h2" style="margin-bottom:2rem;">Armor for<br/>every <em>detail.</em></h2>
+    <p class="body-text" style="margin-bottom:1.5rem;">At APEX SHIELD, we engineer protection that disappears into your paint — invisible to the eye, unbeatable against the road. From our self-healing APX film to our installer-designed tool set, every product earns its place.</p>
+    <p class="body-text">Whether you're protecting a weekend car or running a full detailing studio, our lineup covers every need with the same uncompromising material quality.</p>
+    <div class="intro-stat-row">
+      <div class="stat-box"><span class="stat-n">10<span>yr</span></span><span class="stat-l">Manufacturer Warranty</span></div>
+      <div class="stat-box"><span class="stat-n">99<span>%</span></span><span class="stat-l">UV Blocking Rate</span></div>
+      <div class="stat-box"><span class="stat-n">500<span>+</span></span><span class="stat-l">Pro Installers Trust Us</span></div>
+      <div class="stat-box"><span class="stat-n">3</span><span class="stat-l">Complete Product Lines</span></div>
+    </div>
   </div>
+  <div class="intro-right r">
+    <div style="aspect-ratio:3/4;background:var(--bg3);overflow:hidden;border:1px solid var(--line);margin-bottom:3rem;">
+      <img src="assets/4.png" alt="PPF Application" style="width:100%;height:100%;object-fit:cover;opacity:.65;mix-blend-mode:luminosity;" onerror="this.style.display='none'"/>
+      <div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-family:var(--font-syne);font-size:.6rem;letter-spacing:.2em;color:rgba(255,255,255,.08);">PHOTO</div>
+    </div>
+    <p class="body-text">Tested in the field. Refined in the lab. Every formula, every edge, every tool is the result of obsessive iteration alongside real installers.</p>
+  </div>
+</div>
+
+<div class="collage">
+  <div class="col-cell span2"><img src="assets/2.png" alt="PPF" onerror="this.style.display='none'"/><div class="col-ph">PHOTO</div><div class="col-label">APX PPF Film</div></div>
+  <div class="col-cell"><img src="assets/6.png" alt="Tools" onerror="this.style.display='none'"/><div class="col-ph">PHOTO</div><div class="col-label">Pro Tools</div></div>
+  <div class="col-cell"><img src="assets/11.png" alt="Kit" onerror="this.style.display='none'"/><div class="col-ph">PHOTO</div><div class="col-label">Shield Kit</div></div>
+  <div class="col-cell"><img src="assets/3.png" alt="Result" onerror="this.style.display='none'"/><div class="col-ph">PHOTO</div></div>
+  <div class="col-cell"><img src="assets/7.png" alt="Detail" onerror="this.style.display='none'"/><div class="col-ph">PHOTO</div></div>
+</div>
+
+<section class="products-s">
+  <div class="products-header r">
+    <div>
+      <div class="label">Our Lineup</div>
+      <h2 class="h2">Three products.<br/><em>One system.</em></h2>
+    </div>
+    <p class="products-header-right body-text">Each product works independently — together they form a complete installation system used by professionals worldwide.</p>
+  </div>
+  <a href="product.html?id=ppf" class="product-row r">
+    <div class="pr-num">01</div>
+    <div class="pr-img"><img src="assets/1.png" alt="APX PPF" onerror="this.style.display='none'"/></div>
+    <div><div class="pr-tag">Paint Protection Film</div><div class="pr-name">APX PPF Film</div><p class="pr-desc">Self-healing, crystal-clear thermoplastic urethane. 10-year warranty.</p></div>
+    <div class="pr-right"><div class="pr-price">From $299 <small>/ roll</small></div><div class="pr-arrow">View →</div></div>
+  </a>
+  <a href="product.html?id=tools" class="product-row r">
+    <div class="pr-num">02</div>
+    <div class="pr-img"><img src="assets/6.png" alt="Tools" onerror="this.style.display='none'"/></div>
+    <div><div class="pr-tag">Application Tools</div><div class="pr-name">Pro Wrap Tools</div><p class="pr-desc">7-piece professional set — squeegees, knifeless tape, blades, and spray.</p></div>
+    <div class="pr-right"><div class="pr-price">From $89 <small>/ set</small></div><div class="pr-arrow">View →</div></div>
+  </a>
+  <a href="product.html?id=kit" class="product-row r">
+    <div class="pr-num">03</div>
+    <div class="pr-img"><img src="assets/11.png" alt="Kit" onerror="this.style.display='none'"/></div>
+    <div><div class="pr-tag" style="color:var(--ink2);">★ Best Value Bundle</div><div class="pr-name">Shield Pro Kit</div><p class="pr-desc">Film + tools + manual + video access + 12-month support. Save $39.</p></div>
+    <div class="pr-right"><div class="pr-price">From $349 <small>/ kit</small></div><div class="pr-arrow">View →</div></div>
+  </a>
 </section>
 
-<!-- VIDEO SECTION -->
-<section class="video-section">
-  <div class="video-section-inner">
-    <div class="video-text reveal-left">
-      <div class="section-tag">See It In Action</div>
-      <h2 class="section-title">HOW TO<br/>APPLY PPF</h2>
-      <p class="section-body" style="margin-bottom:1.5rem;">Watch our professional installation guide and learn the techniques used by the world's best detailers. From surface prep to final trim — we cover it all.</p>
-      <p class="section-body" style="margin-bottom:2rem;">Our step-by-step video series covers everything from panel-by-panel full wraps to spot repairs and edge finishing.</p>
-      <div class="video-upload-note">📹 Add your YouTube or Vimeo link to embed video here</div>
-    </div>
-    <div class="video-embed reveal">
-      <!-- REPLACE src with your YouTube embed URL like: https://www.youtube.com/embed/YOUR_VIDEO_ID -->
-      <div class="video-placeholder">
-        <div class="video-play-btn">▶</div>
-        <p>Installation Guide Video</p>
-        <p style="font-size:.65rem;color:var(--gold-dim);letter-spacing:.15em;margin-top:.3rem;">Replace with your video embed</p>
-      </div>
-      <!-- UNCOMMENT AND REPLACE with your video:
-      <iframe src="https://www.youtube.com/embed/YOUR_VIDEO_ID" allowfullscreen></iframe>
-      -->
+<section class="video-s">
+  <div class="video-text-side r">
+    <div class="label">See It In Action</div>
+    <h2 class="h2" style="margin-bottom:2rem;">How to<br/>apply <em>PPF.</em></h2>
+    <p class="body-text" style="margin-bottom:1.5rem;">Watch our professional installation walkthrough — from surface prep and panel cutting to final edge sealing. Every step, clearly shown.</p>
+    <p class="body-text">Our video series covers full wraps, spot repairs, headlight installs, and common beginner mistakes to avoid.</p>
+    <div class="video-upload">📹 Paste your YouTube embed URL to activate video</div>
+  </div>
+  <div class="video-embed-side r">
+    <div class="video-frame">
+      <!-- Replace with: <iframe src="https://www.youtube.com/embed/YOUR_ID" allowfullscreen></iframe> -->
+      <div class="play-ring">▶</div>
+      <div class="video-note">Installation Guide Video</div>
     </div>
   </div>
 </section>
 
-<!-- WHY APEX SHIELD -->
-<section class="section" style="background:var(--gray);border-top:1px solid rgba(201,168,76,.08);">
-  <div class="section-tag reveal">Why Choose Us</div>
-  <h2 class="section-title reveal">THE APEX<br/>DIFFERENCE</h2>
-  <div class="why-grid">
-    <div class="why-item reveal">
-      <div class="why-icon">⬡</div>
-      <div class="why-title">Self-Healing Technology</div>
-      <p class="why-text">Our APX film repairs light scratches with heat — maintaining a flawless surface for years without any intervention.</p>
-    </div>
-    <div class="why-item reveal">
-      <div class="why-icon">◈</div>
-      <div class="why-title">Optical Clarity</div>
-      <p class="why-text">99.5% light transmission. No yellowing, no hazing — your paint stays as vibrant and deep as the day it was painted.</p>
-    </div>
-    <div class="why-item reveal">
-      <div class="why-icon">✦</div>
-      <div class="why-title">10-Year Warranty</div>
-      <p class="why-text">Every roll of APX PPF comes with a full manufacturer warranty covering delamination, yellowing, and adhesive failure.</p>
-    </div>
-    <div class="why-item reveal">
-      <div class="why-icon">◉</div>
-      <div class="why-title">Pro-Grade Tools</div>
-      <p class="why-text">Designed alongside professional installers — our tools make every wrap job more precise, faster, and cleaner.</p>
+<section class="why-s">
+  <div class="why-sticky rl">
+    <div class="label">The Difference</div>
+    <h2 class="h2" style="font-size:clamp(2rem,3vw,3.5rem);">Why<br/>APEX<br/><em>Shield.</em></h2>
+  </div>
+  <div class="why-items">
+    <div class="why-item r"><div class="why-num">01</div><div><div class="why-title">Self-Healing Film</div><p class="why-body">Our APX formula repairs light surface scratches automatically with ambient or applied heat. Maintain a flawless surface for the life of the film.</p></div></div>
+    <div class="why-item r"><div class="why-num">02</div><div><div class="why-title">Optical Clarity</div><p class="why-body">99.5% light transmission. Zero orange-peel. Zero haze. Your paint stays exactly as deep and vivid as the day it was shot.</p></div></div>
+    <div class="why-item r"><div class="why-num">03</div><div><div class="why-title">Installer-Designed Tools</div><p class="why-body">Every tool in our Pro set was designed alongside working installers, refined over dozens of real-world installs for cleaner, faster results.</p></div></div>
+    <div class="why-item r"><div class="why-num">04</div><div><div class="why-title">10-Year Warranty</div><p class="why-body">Every roll is backed by a full decade of manufacturer warranty — covering delamination, yellowing, cracking, and adhesive failure.</p></div></div>
+  </div>
+</section>
+
+<section class="process-s">
+  <div class="process-inner">
+    <div class="label r">The Process</div>
+    <h2 class="h2 r">Four steps to<br/><em>flawless.</em></h2>
+    <div class="process-grid">
+      <div class="process-cell r"><div class="pc-step">Step 01</div><div class="pc-title">Surface Prep</div><p class="pc-body">Decontaminate, clay bar, and isopropyl wipe every panel. A clean surface means a perfect bond.</p></div>
+      <div class="process-cell r"><div class="pc-step">Step 02</div><div class="pc-title">Measure & Cut</div><p class="pc-body">Knifeless tape and precision cutter trim film to exact dimensions — zero paint contact risk.</p></div>
+      <div class="process-cell r"><div class="pc-step">Step 03</div><div class="pc-title">Apply & Squeegee</div><p class="pc-body">Wet application with installation spray. Work center-out with felt-edge squeegees.</p></div>
+      <div class="process-cell r"><div class="pc-step">Step 04</div><div class="pc-title">Heat & Seal</div><p class="pc-body">Heat-gun stretch around curves. Seal all edges with the roller for a lifetime-lasting result.</p></div>
     </div>
   </div>
 </section>
 
-<!-- HOW IT WORKS / PROCESS -->
-<section class="process-section">
-  <div style="text-align:center;margin-bottom:1rem;">
-    <div class="section-tag reveal" style="justify-content:center;">The Process</div>
-    <h2 class="section-title reveal">HOW IT WORKS</h2>
-  </div>
-  <div class="process-steps">
-    <div class="process-step reveal">
-      <span class="step-num">01</span>
-      <div class="step-dot"></div>
-      <div class="step-title">Surface Prep</div>
-      <p class="step-text">Clean and decontaminate the paint surface. Clay bar treatment ensures a perfect bond between paint and film.</p>
-    </div>
-    <div class="process-step reveal">
-      <span class="step-num">02</span>
-      <div class="step-dot"></div>
-      <div class="step-title">Measure & Cut</div>
-      <p class="step-text">Use our precision tools and knifeless tape to cut the film exactly to panel dimensions with zero paint risk.</p>
-    </div>
-    <div class="process-step reveal">
-      <span class="step-num">03</span>
-      <div class="step-dot"></div>
-      <div class="step-title">Apply & Squeegee</div>
-      <p class="step-text">Wet application method with installation spray. Work out air and solution bubbles with felt-edge squeegees.</p>
-    </div>
-    <div class="process-step reveal">
-      <span class="step-num">04</span>
-      <div class="step-dot"></div>
-      <div class="step-title">Heat & Finish</div>
-      <p class="step-text">Use a heat gun to stretch film around edges. Final inspection and edge sealing for a lifetime-lasting result.</p>
-    </div>
+<section class="test-s">
+  <div class="test-header r"><div class="label">Reviews</div><h2 class="h2">What installers<br/>are <em>saying.</em></h2></div>
+  <div class="test-grid">
+    <div class="test-card r"><div class="test-stars">★★★★★</div><p class="test-quote">"The APX film is genuinely the clearest PPF I've ever installed. Zero orange peel, zero haze. My clients are floored every time."</p><div class="test-author-name">Jake M.</div><div class="test-author-role">Professional Installer · Miami, FL</div></div>
+    <div class="test-card r"><div class="test-stars">★★★★★</div><p class="test-quote">"Tried every brand. Nothing touches the squeegee quality in this tool kit. Felt edges are perfect — no marring, ever."</p><div class="test-author-name">Ryan K.</div><div class="test-author-role">Detailing Shop Owner · Austin, TX</div></div>
+    <div class="test-card r"><div class="test-stars">★★★★★</div><p class="test-quote">"The Shield Pro Kit got me from zero knowledge to clean panel installs in a weekend. Incredible value for everything included."</p><div class="test-author-name">Carlos L.</div><div class="test-author-role">Enthusiast Installer · Los Angeles, CA</div></div>
   </div>
 </section>
 
-<!-- TESTIMONIALS -->
-<section class="testimonials-section">
-  <div class="section-tag reveal">Real Results</div>
-  <h2 class="section-title reveal">WHAT DETAILERS<br/>ARE SAYING</h2>
-  <div class="testimonials-grid">
-    <div class="testimonial reveal">
-      <div class="stars">★★★★★</div>
-      <p class="testimonial-text">The APX film is genuinely the clearest PPF I've ever worked with. Zero orange peel, zero haze. My clients are blown away every single time.</p>
-      <div class="testimonial-author">
-        <div class="author-avatar">JM</div>
-        <div>
-          <div class="author-name">Jake M.</div>
-          <div class="author-meta">Professional Installer · Miami, FL</div>
-        </div>
-      </div>
-    </div>
-    <div class="testimonial reveal">
-      <div class="stars">★★★★★</div>
-      <p class="testimonial-text">I tried every brand on the market. Nothing comes close to the tool kit's squeegee quality. The felt edges are perfect — no scratching, ever.</p>
-      <div class="testimonial-author">
-        <div class="author-avatar">RK</div>
-        <div>
-          <div class="author-name">Ryan K.</div>
-          <div class="author-meta">Detailing Shop Owner · Austin, TX</div>
-        </div>
-      </div>
-    </div>
-    <div class="testimonial reveal">
-      <div class="stars">★★★★★</div>
-      <p class="testimonial-text">The Shield Pro Kit is perfect for someone just starting out. Everything you need, quality that rivals tools costing 3x more. Incredible value.</p>
-      <div class="testimonial-author">
-        <div class="author-avatar">CL</div>
-        <div>
-          <div class="author-name">Carlos L.</div>
-          <div class="author-meta">Enthusiast Installer · Los Angeles, CA</div>
-        </div>
-      </div>
-    </div>
-  </div>
+<section class="cta-s">
+  <div class="cta-glow"></div>
+  <div class="label r" style="justify-content:center;">Ready?</div>
+  <h2 class="cta-h r">Start your<br/><em>build today.</em></h2>
+  <p class="cta-sub r">Join hundreds of detailers and car enthusiasts who trust APEX SHIELD for every job.</p>
+  <a href="products.html" class="btn-lg r">Shop All Products</a>
 </section>
 
-<!-- CTA BAND -->
-<section class="cta-band">
-  <div class="section-tag reveal" style="justify-content:center;">Ready to Protect?</div>
-  <h2 class="section-title reveal">START YOUR<br/>BUILD TODAY</h2>
-  <p class="section-body reveal">Join hundreds of detailers and car enthusiasts who trust APEX SHIELD for every job.</p>
-  <a href="products.html" class="btn-primary reveal">Shop All Products</a>
-</section>
-
-<!-- FOOTER -->
 <footer>
-  <div class="footer-top">
-    <div class="footer-brand">
-      <a href="index.html" class="footer-logo">APEX<span>SHIELD</span></a>
-      <p class="footer-tagline">Professional paint protection films and tools for detailers who demand perfection.</p>
-    </div>
-    <div>
-      <div class="footer-col-title">Products</div>
-      <ul class="footer-links">
-        <li><a href="product.html?id=ppf">APX PPF Film</a></li>
-        <li><a href="product.html?id=tools">Pro Wrap Tools</a></li>
-        <li><a href="product.html?id=kit">Shield Pro Kit</a></li>
-        <li><a href="products.html">All Products</a></li>
-      </ul>
-    </div>
-    <div>
-      <div class="footer-col-title">Company</div>
-      <ul class="footer-links">
-        <li><a href="index.html">Home</a></li>
-        <li><a href="contact.html">Contact Us</a></li>
-        <li><a href="contact.html#faq">FAQ</a></li>
-        <li><a href="contact.html#shipping">Shipping Info</a></li>
-      </ul>
-    </div>
-    <div>
-      <div class="footer-col-title">Support</div>
-      <ul class="footer-links">
-        <li><a href="contact.html">Get Help</a></li>
-        <li><a href="contact.html#faq">Installation Guide</a></li>
-        <li><a href="contact.html">Warranty Claims</a></li>
-        <li><a href="contact.html">Returns Policy</a></li>
-      </ul>
-    </div>
+  <div class="ft">
+    <div><a href="index.html" class="ft-logo"><span class="dot"></span>APEX SHIELD</a><p class="ft-tag">Professional paint protection films and tools for detailers who demand perfection.</p></div>
+    <div><div class="ft-col-title">Products</div><ul class="ft-links"><li><a href="product.html?id=ppf">APX PPF Film</a></li><li><a href="product.html?id=tools">Pro Wrap Tools</a></li><li><a href="product.html?id=kit">Shield Pro Kit</a></li><li><a href="products.html">All Products</a></li></ul></div>
+    <div><div class="ft-col-title">Company</div><ul class="ft-links"><li><a href="index.html">Home</a></li><li><a href="contact.html">Contact</a></li><li><a href="contact.html#faq">FAQ</a></li><li><a href="contact.html#shipping">Shipping</a></li></ul></div>
+    <div><div class="ft-col-title">Support</div><ul class="ft-links"><li><a href="contact.html">Get Help</a></li><li><a href="contact.html#faq">Install Guide</a></li><li><a href="contact.html">Warranty</a></li><li><a href="contact.html">Returns</a></li></ul></div>
   </div>
-  <div class="footer-bottom">
-    <p class="footer-copy">© 2025 APEX SHIELD. All rights reserved. Professional Paint Protection.</p>
-    <div class="footer-social">
-      <a href="#" class="social-link" aria-label="Instagram">IG</a>
-      <a href="#" class="social-link" aria-label="YouTube">YT</a>
-      <a href="#" class="social-link" aria-label="Facebook">FB</a>
-    </div>
-  </div>
+  <div class="ft-bottom"><p class="ft-copy">© 2025 APEX SHIELD. All rights reserved.</p><div class="ft-social"><a href="#" class="ft-soc">IG</a><a href="#" class="ft-soc">YT</a><a href="#" class="ft-soc">FB</a></div></div>
 </footer>
 
 <script>
-// NAV SCROLL
-const navbar=document.getElementById('navbar');
-window.addEventListener('scroll',()=>{
-  navbar.style.background=window.scrollY>60?'rgba(8,8,8,.95)':'rgba(8,8,8,.7)';
-});
-
-// HAMBURGER
-const hamburger=document.getElementById('hamburger');
-const mobileMenu=document.getElementById('mobileMenu');
-const mobileClose=document.getElementById('mobileClose');
-function closeMobile(){mobileMenu.classList.remove('open');}
-hamburger.addEventListener('click',()=>mobileMenu.classList.add('open'));
-mobileClose.addEventListener('click',closeMobile);
-
-// SCROLL REVEAL
-const reveals=document.querySelectorAll('.reveal,.reveal-left');
-const observer=new IntersectionObserver((entries)=>{
-  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');}});
-},{threshold:.1,rootMargin:'0px 0px -60px 0px'});
-reveals.forEach(r=>observer.observe(r));
-
-// HERO BG fallback
-const heroPh=document.getElementById('heroPh');
-const heroImg=document.querySelector('.hero-img');
-if(heroImg){
-  heroImg.addEventListener('load',()=>{heroPh.style.display='none';});
-  heroImg.addEventListener('error',()=>{heroPh.style.display='block';});
-}
+document.getElementById('hamburger').addEventListener('click',()=>document.getElementById('mobileMenu').classList.add('open'));
+document.getElementById('mobileClose').addEventListener('click',()=>document.getElementById('mobileMenu').classList.remove('open'));
+const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('on');});},{threshold:.1,rootMargin:'0px 0px -50px 0px'});
+document.querySelectorAll('.r,.rl').forEach(el=>obs.observe(el));
 </script>
 </body>
 </html>
