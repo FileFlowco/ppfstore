@@ -12,7 +12,7 @@
   --bg:#111213;--bg2:#161819;--bg3:#1c1e20;--surface:#212426;
   --line:rgba(255,255,255,.07);--line2:rgba(255,255,255,.12);
   --white:#f0efed;--off:#b8b5b0;--dim:#6a6866;
-  --ink:#7b88ff;--ink2:#a0aaff;--ink3:rgba(123,136,255,.12);--ink4:rgba(123,136,255,.06);
+  --ink:#9b59ff;--ink2:#bb86ff;--ink3:rgba(155,89,255,.12);--ink4:rgba(155,89,255,.06);
   --font-serif:'DM Serif Display',serif;--font-sans:'DM Sans',sans-serif;--font-syne:'Syne',sans-serif;
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
@@ -20,22 +20,22 @@ html{scroll-behavior:smooth;}
 body{background:var(--bg);color:var(--white);font-family:var(--font-sans);font-weight:300;overflow-x:hidden;-webkit-font-smoothing:antialiased;}
 body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:999;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)' opacity='0.035'/%3E%3C/svg%3E");opacity:.5;}
 
-nav{position:fixed;top:0;left:0;right:0;z-index:900;height:68px;display:flex;align-items:center;padding:0 5vw;border-bottom:1px solid var(--line);background:rgba(17,18,19,.85);backdrop-filter:blur(20px) saturate(150%);}
-.nav-logo{font-family:var(--font-syne);font-weight:800;font-size:1.1rem;letter-spacing:.08em;text-transform:uppercase;color:var(--white);text-decoration:none;display:flex;align-items:center;gap:.5rem;}
+nav{position:fixed;top:0;left:0;right:0;z-index:900;height:68px;display:flex;align-items:center;justify-content:space-between;padding:0 5vw;border-bottom:1px solid var(--line);background:rgba(17,18,19,.85);backdrop-filter:blur(20px) saturate(150%);}
+.nav-logo{font-family:var(--font-syne);font-weight:800;font-size:1.1rem;letter-spacing:.08em;text-transform:uppercase;color:var(--white);text-decoration:none;display:flex;align-items:center;gap:.5rem;flex-shrink:0;}
 .nav-logo .dot{width:8px;height:8px;border-radius:50%;background:var(--ink);box-shadow:0 0 12px var(--ink);}
 .nav-center{flex:1;display:flex;justify-content:center;gap:3rem;list-style:none;}
 .nav-center a{font-family:var(--font-sans);font-size:.78rem;font-weight:400;letter-spacing:.06em;color:var(--dim);text-decoration:none;transition:.25s;}
 .nav-center a:hover{color:var(--white);}
-.nav-right{display:flex;align-items:center;gap:1.5rem;}
+.nav-right{display:flex;align-items:center;gap:1.5rem;flex-shrink:0;}
 .nav-btn{font-family:var(--font-syne);font-size:.72rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;padding:.5rem 1.3rem;border:1px solid var(--ink);color:var(--ink);text-decoration:none;transition:.25s;background:transparent;}
 .nav-btn:hover{background:var(--ink);color:var(--bg);}
-.hamburger{display:none;flex-direction:column;gap:5px;background:none;border:none;padding:4px;cursor:pointer;}
-.hamburger span{width:22px;height:1px;background:var(--white);display:block;}
+.hamburger{display:none;flex-direction:column;gap:5px;background:none;border:none;padding:4px;cursor:pointer;flex-shrink:0;}
+.hamburger span{width:22px;height:1px;background:var(--white);display:block;transition:.3s;}
 .mobile-menu{display:none;position:fixed;inset:0;z-index:850;background:rgba(17,18,19,.98);flex-direction:column;align-items:center;justify-content:center;gap:2.5rem;backdrop-filter:blur(10px);}
 .mobile-menu.open{display:flex;}
-.mobile-menu a{font-family:var(--font-syne);font-size:2.5rem;font-weight:700;color:var(--white);text-decoration:none;letter-spacing:.05em;transition:.2s;}
+.mobile-menu a{font-family:var(--font-syne);font-size:2.2rem;font-weight:700;color:var(--white);text-decoration:none;letter-spacing:.05em;transition:.2s;}
 .mobile-menu a:hover{color:var(--ink);}
-.mobile-close{position:absolute;top:2rem;right:2rem;background:none;border:none;color:var(--white);font-size:1.5rem;cursor:pointer;}
+.mobile-close{position:absolute;top:1.5rem;right:5vw;background:none;border:none;color:var(--white);font-size:1.5rem;cursor:pointer;}
 
 .hero{min-height:100vh;display:grid;grid-template-columns:1fr 1fr;position:relative;overflow:hidden;}
 .hero-left{display:flex;flex-direction:column;justify-content:flex-end;padding:10rem 5vw 8rem;position:relative;z-index:2;border-right:1px solid var(--line);}
@@ -50,10 +50,9 @@ nav{position:fixed;top:0;left:0;right:0;z-index:900;height:68px;display:flex;ali
 .btn-line{font-family:var(--font-syne);font-size:.72rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;padding:.85rem 2rem;background:transparent;color:var(--off);text-decoration:none;border:1px solid var(--line2);transition:.25s;}
 .btn-line:hover{border-color:var(--white);color:var(--white);}
 .hero-right{position:relative;overflow:hidden;background:var(--bg2);}
-.hero-img-wrap{position:absolute;inset:0;}
-.hero-img-wrap img{width:100%;height:100%;object-fit:cover;opacity:.55;mix-blend-mode:luminosity;}
+.hero-img-wrap{position:absolute;inset:0;background-image:url('assets/1.png');background-size:cover;background-position:center;opacity:.55;mix-blend-mode:luminosity;}
 .hero-gradient{position:absolute;inset:0;background:linear-gradient(to right,var(--bg) 0%,transparent 35%),linear-gradient(to top,var(--bg) 0%,transparent 30%);}
-.hero-img-ph{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#161819,#1c1e20);}
+.hero-img-ph{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#161819,#1c1e20);z-index:-1;}
 
 .marquee-wrap{overflow:hidden;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:.9rem 0;background:var(--bg2);}
 .marquee-track{display:flex;gap:4rem;width:max-content;animation:marquee 28s linear infinite;}
@@ -279,10 +278,8 @@ footer{border-top:1px solid var(--line);padding:6rem 5vw 3rem;background:var(--b
     </div>
   </div>
   <div class="hero-right">
-    <div class="hero-img-wrap">
-      <img src="assets/1.png" alt="APX PPF Film" onerror="this.style.display='none'"/>
-      <div class="hero-gradient"></div>
-    </div>
+    <div class="hero-img-wrap"></div>
+    <div class="hero-gradient"></div>
     <div class="hero-img-ph"></div>
   </div>
 </section>
@@ -317,7 +314,7 @@ footer{border-top:1px solid var(--line);padding:6rem 5vw 3rem;background:var(--b
   </div>
   <div class="intro-right r">
     <div style="aspect-ratio:3/4;background:var(--bg3);overflow:hidden;border:1px solid var(--line);margin-bottom:3rem;">
-      <img src="assets/4.png" alt="PPF Application" style="width:100%;height:100%;object-fit:cover;opacity:.65;mix-blend-mode:luminosity;" onerror="this.style.display='none'"/>
+      <img src="assets/2.png" alt="PPF Application" style="width:100%;height:100%;object-fit:cover;opacity:.65;mix-blend-mode:luminosity;" onerror="this.style.display='none'"/>
       <div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-family:var(--font-syne);font-size:.6rem;letter-spacing:.2em;color:rgba(255,255,255,.08);">PHOTO</div>
     </div>
     <p class="body-text">Tested in the field. Refined in the lab. Every formula, every edge, every tool is the result of obsessive iteration alongside real installers.</p>
@@ -325,11 +322,11 @@ footer{border-top:1px solid var(--line);padding:6rem 5vw 3rem;background:var(--b
 </div>
 
 <div class="collage">
-  <div class="col-cell span2"><img src="assets/2.png" alt="PPF" onerror="this.style.display='none'"/><div class="col-ph">PHOTO</div><div class="col-label">APX PPF Film</div></div>
-  <div class="col-cell"><img src="assets/6.png" alt="Tools" onerror="this.style.display='none'"/><div class="col-ph">PHOTO</div><div class="col-label">Pro Tools</div></div>
-  <div class="col-cell"><img src="assets/11.png" alt="Kit" onerror="this.style.display='none'"/><div class="col-ph">PHOTO</div><div class="col-label">Shield Kit</div></div>
-  <div class="col-cell"><img src="assets/3.png" alt="Result" onerror="this.style.display='none'"/><div class="col-ph">PHOTO</div></div>
-  <div class="col-cell"><img src="assets/7.png" alt="Detail" onerror="this.style.display='none'"/><div class="col-ph">PHOTO</div></div>
+  <div class="col-cell span2"><img src="assets/1.png" alt="PPF" onerror="this.style.display='none'"/><div class="col-ph">PHOTO</div><div class="col-label">APX PPF Film</div></div>
+  <div class="col-cell"><img src="assets/2.png" alt="Tools" onerror="this.style.display='none'"/><div class="col-ph">PHOTO</div><div class="col-label">Pro Tools</div></div>
+  <div class="col-cell"><img src="assets/3.png" alt="Kit" onerror="this.style.display='none'"/><div class="col-ph">PHOTO</div><div class="col-label">Shield Kit</div></div>
+  <div class="col-cell"><img src="assets/4.png" alt="Result" onerror="this.style.display='none'"/><div class="col-ph">PHOTO</div></div>
+  <div class="col-cell" style="background:var(--bg3);display:flex;align-items:center;justify-content:center;"><span style="font-family:var(--font-syne);font-size:.6rem;letter-spacing:.2em;color:rgba(255,255,255,.08);">MORE COMING</span></div>
 </div>
 
 <section class="products-s">
@@ -348,13 +345,13 @@ footer{border-top:1px solid var(--line);padding:6rem 5vw 3rem;background:var(--b
   </a>
   <a href="product.html?id=tools" class="product-row r">
     <div class="pr-num">02</div>
-    <div class="pr-img"><img src="assets/6.png" alt="Tools" onerror="this.style.display='none'"/></div>
+    <div class="pr-img"><img src="assets/3.png" alt="Tools" onerror="this.style.display='none'"/></div>
     <div><div class="pr-tag">Application Tools</div><div class="pr-name">Pro Wrap Tools</div><p class="pr-desc">7-piece professional set — squeegees, knifeless tape, blades, and spray.</p></div>
     <div class="pr-right"><div class="pr-price">From $89 <small>/ set</small></div><div class="pr-arrow">View →</div></div>
   </a>
   <a href="product.html?id=kit" class="product-row r">
     <div class="pr-num">03</div>
-    <div class="pr-img"><img src="assets/11.png" alt="Kit" onerror="this.style.display='none'"/></div>
+    <div class="pr-img"><img src="assets/4.png" alt="Kit" onerror="this.style.display='none'"/></div>
     <div><div class="pr-tag" style="color:var(--ink2);">★ Best Value Bundle</div><div class="pr-name">Shield Pro Kit</div><p class="pr-desc">Film + tools + manual + video access + 12-month support. Save $39.</p></div>
     <div class="pr-right"><div class="pr-price">From $349 <small>/ kit</small></div><div class="pr-arrow">View →</div></div>
   </a>
