@@ -12,7 +12,7 @@
   --bg:#111213;--bg2:#161819;--bg3:#1c1e20;--surface:#212426;
   --line:rgba(255,255,255,.07);--line2:rgba(255,255,255,.12);
   --white:#f0efed;--off:#b8b5b0;--dim:#6a6866;
-  --ink:#9b59ff;--ink2:#bb86ff;--ink3:rgba(123,136,255,.12);--ink4:rgba(123,136,255,.06);
+  --ink:#7b88ff;--ink2:#a0aaff;--ink3:rgba(123,136,255,.12);--ink4:rgba(123,136,255,.06);
   --font-serif:'DM Serif Display',serif;--font-sans:'DM Sans',sans-serif;--font-syne:'Syne',sans-serif;
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
@@ -105,13 +105,10 @@ nav{position:fixed;top:0;left:0;right:0;z-index:900;height:68px;display:flex;ali
 
 .video-s{display:grid;grid-template-columns:1fr 1fr;border-top:1px solid var(--line);}
 .video-text-side{padding:8rem 5vw;border-right:1px solid var(--line);display:flex;flex-direction:column;justify-content:center;}
-.video-embed-side{background:var(--bg2);display:flex;align-items:center;justify-content:center;min-height:400px;}
-.video-frame{width:100%;aspect-ratio:16/9;background:var(--bg3);position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:1.2rem;}
-.video-frame iframe{position:absolute;inset:0;width:100%;height:100%;border:none;}
-.play-ring{width:80px;height:80px;border-radius:50%;border:1px solid var(--ink);display:flex;align-items:center;justify-content:center;color:var(--ink);font-size:1.4rem;transition:.3s;cursor:pointer;}
-.play-ring:hover{background:var(--ink);color:var(--bg);}
+.video-embed-side{background:var(--bg2);display:flex;align-items:center;justify-content:center;padding:4rem 3rem;min-height:500px;}
+.video-frame{width:100%;max-width:320px;aspect-ratio:9/16;background:var(--bg3);position:relative;overflow:hidden;border:1px solid var(--line2);}
+.video-frame video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;}
 .video-note{font-family:var(--font-syne);font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;color:var(--dim);}
-.video-upload{font-family:var(--font-syne);font-size:.62rem;letter-spacing:.12em;color:var(--ink);border:1px dashed rgba(123,136,255,.3);padding:.5rem 1rem;margin-top:1.5rem;display:inline-block;}
 
 .why-s{border-top:1px solid var(--line);display:grid;grid-template-columns:1fr 3fr;}
 .why-sticky{padding:6rem 4vw;border-right:1px solid var(--line);position:sticky;top:68px;height:fit-content;}
@@ -172,13 +169,14 @@ footer{border-top:1px solid var(--line);padding:6rem 5vw 3rem;background:var(--b
 
 @media(max-width:1100px){
   .hero{grid-template-columns:1fr;}
-  .hero-right{height:55vw;min-height:300px;}
+  .hero-right{height:60vw;min-height:280px;}
   .intro-split{grid-template-columns:1fr;}
   .intro-left{border-right:none;border-bottom:1px solid var(--line);}
   .why-s{grid-template-columns:1fr;}
   .why-sticky{position:static;border-right:none;border-bottom:1px solid var(--line);}
   .video-s{grid-template-columns:1fr;}
   .video-text-side{border-right:none;border-bottom:1px solid var(--line);}
+  .video-embed-side{padding:3rem 2rem;}
   .process-grid{grid-template-columns:1fr 1fr;}
   .ft{grid-template-columns:1fr 1fr;gap:3rem;}
   .product-row{grid-template-columns:1fr auto;gap:1.5rem;}
@@ -187,16 +185,66 @@ footer{border-top:1px solid var(--line);padding:6rem 5vw 3rem;background:var(--b
 @media(max-width:768px){
   .nav-center,.nav-btn{display:none;}
   .hamburger{display:flex;}
-  .test-grid{grid-template-columns:1fr;}
+
+  /* Hero */
+  .hero-left{padding:7rem 6vw 4rem;}
+  .hero-h1{font-size:clamp(3rem,14vw,5rem);}
+  .hero-body{font-size:.88rem;max-width:100%;}
+  .hero-actions{flex-direction:column;gap:.7rem;}
+  .btn-fill,.btn-line{text-align:center;width:100%;padding:.85rem 1.5rem;}
+
+  /* Intro */
+  .intro-left,.intro-right{padding:4rem 6vw;}
+  .intro-stat-row{grid-template-columns:1fr 1fr;}
+  .stat-box{padding:1.5rem 1rem;}
+  .stat-n{font-size:2rem;}
+
+  /* Collage */
   .collage{grid-template-columns:1fr 1fr;grid-template-rows:auto;}
-  .col-cell.span2{grid-row:auto;}
+  .col-cell.span2{grid-row:auto;aspect-ratio:4/3;}
+  .col-cell{aspect-ratio:4/3;}
+
+  /* Products */
+  .products-header{padding:3rem 6vw;flex-direction:column;gap:1.5rem;align-items:flex-start;}
+  .products-header-right{text-align:left;max-width:100%;}
+  .product-row{padding:2rem 6vw;grid-template-columns:1fr auto;gap:1rem;}
+  .pr-num,.pr-img{display:none;}
+  .pr-name{font-size:1.4rem;}
+  .pr-right{flex-direction:column;align-items:flex-end;gap:.3rem;}
+  .pr-price{font-size:1rem;}
+  .pr-arrow{font-size:.6rem;}
+
+  /* Video */
+  .video-text-side{padding:4rem 6vw;}
+  .video-embed-side{padding:2rem 6vw 3rem;}
+  .video-frame{max-width:240px;}
+
+  /* Why */
+  .why-sticky{padding:3rem 6vw;}
+  .why-items{padding:2rem 6vw 4rem;}
+  .why-item{grid-template-columns:44px 1fr;gap:1rem;padding:2rem 0;}
+  .why-num{font-size:1.8rem;}
+  .why-title{font-size:1.3rem;}
+
+  /* Process */
+  .process-inner{padding:4rem 6vw;}
   .process-grid{grid-template-columns:1fr;}
-  .products-header{flex-direction:column;gap:2rem;align-items:flex-start;}
-  .products-header-right{text-align:left;}
-  .ft{grid-template-columns:1fr;}
+
+  /* Testimonials */
+  .test-header{padding:4rem 6vw 3rem;}
+  .test-grid{grid-template-columns:1fr;}
+  .test-card{padding:2.5rem 6vw;}
+
+  /* CTA */
+  .cta-s{padding:6rem 6vw;}
+
+  /* Footer */
+  .ft{grid-template-columns:1fr;gap:2.5rem;}
   .ft-bottom{flex-direction:column;gap:1.5rem;text-align:center;}
-  .hero-left{padding:8rem 5vw 5rem;}
-  .pr-right{flex-direction:column;align-items:flex-end;gap:.5rem;}
+
+  /* Section spacing */
+  .label{margin-bottom:.8rem;}
+  .h2{font-size:clamp(2rem,10vw,3rem);}
 }
 </style>
 </head>
@@ -207,6 +255,8 @@ footer{border-top:1px solid var(--line);padding:6rem 5vw 3rem;background:var(--b
     <li><a href="index.html">Home</a></li>
     <li><a href="products.html">Products</a></li>
     <li><a href="contact.html">Contact</a></li>
+    <li><a href="products.html#ppf">PPF Film</a></li>
+    <li><a href="products.html#tools">Tools</a></li>
   </ul>
   <div class="nav-right"><a href="products.html" class="nav-btn">Shop</a></div>
   <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
@@ -316,13 +366,12 @@ footer{border-top:1px solid var(--line);padding:6rem 5vw 3rem;background:var(--b
     <h2 class="h2" style="margin-bottom:2rem;">How to<br/>apply <em>PPF.</em></h2>
     <p class="body-text" style="margin-bottom:1.5rem;">Watch our professional installation walkthrough — from surface prep and panel cutting to final edge sealing. Every step, clearly shown.</p>
     <p class="body-text">Our video series covers full wraps, spot repairs, headlight installs, and common beginner mistakes to avoid.</p>
-    <div class="video-upload">📹 Paste your YouTube embed URL to activate video</div>
   </div>
   <div class="video-embed-side r">
     <div class="video-frame">
-      <!-- Replace with: <iframe src="https://www.youtube.com/embed/YOUR_ID" allowfullscreen></iframe> -->
-      <div class="play-ring">▶</div>
-      <div class="video-note">Installation Guide Video</div>
+      <video autoplay muted loop playsinline>
+        <source src="assets/video.mp4" type="video/mp4"/>
+      </video>
     </div>
   </div>
 </section>
